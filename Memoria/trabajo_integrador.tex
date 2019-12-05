@@ -36,6 +36,278 @@
 
 	\newpage
 	
+\section{Análisis Exploratorio de los Datos}
+
+En esta primera sección vamos a hacer una exploración de los datos intentando extraer algunas conclusiones de los mismos y poder conocer más en profundidad la información que nos arrojan las variables. Esta sección va a estar dividida en dos subsecciones, una para el conjunto de regresión y otra para el conjunto de clasificación.
+
+\subsection{Conjunto de Regresión}
+
+El conjunto de datos del que dispongo para realizar regresión es el conjunto ``treasury''. Vamos a analizar el conjunto de datos.
+
+En primer lugar el conjunto de datos dispone de  16 variables numéricas como podemos observar con el siguiente código.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[scale=0.35]{./Imagenes/codigo_variables_tipos.png}
+	\end{subfigure}
+	\begin{subfigure}{0.47\textwidth}
+		\includegraphics[scale=0.4]{./Imagenes/variables_tipos.png}
+	\end{subfigure}
+	\caption{Tipos de las variables y código para obtenerlos}
+\end{figure}
+
+Como podemos ver el conjunto dispone de 16 variables de las cuales todas son numéricas. Esto es lógico pues el conjunto está destinado para el problema de regresión y además nos facilita el trabajo. 
+
+Para poder seguir analizando el conjunto vamos a hacer un estudio pormenorizado de las variables del mismo en función a una serie de estadísticos básicos.
+
+Estos estadísticos que voy a emplear son: media, mediana, moda, desviación típica, mínimo, máximo, curtosis y asimetría.
+
+En este conjunto podemos dividir las variables en dos grupos. El primero de ellos corresponde a las variables de entrada que son las que nos van a permitir obtener resultados sobre la salida y el segundo grupo es la propia salida esperada del sistema.
+
+Vamos a empezar a analizar en primer lugar la salida.
+
+\subsubsection{Estudio de los estadísticos}
+
+\subsubsection*{Salida}
+La variable de salida es la que tiene por nombre 1MonthCDRate. Los estadísticos que nos arroja esta variable son los siguientes:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_1MonthCDRate.png}
+	\caption{Estadísticos de la variable de salida.}
+\end{figure}
+
+Podemos observar que la  media de la salida es aproximadamente de $7.5$ y su desviación típica de $3.3$, esto nos indica que la mayoría de los datos (el 95\% en caso de estar ante una distribución normal) van a estar dentro del intervalo $[0.9,14,1]$. Aún así podemos ver mediante el mínimo y el máximo que los datos se van a mover en el intervalo $[3.02, 20.76]$. Esto parece que nos va a indicar que deberíamos de tener una cola más pesada a la izquierda de la distribución y una cola más alargada a la derecha de la misma. Este hecho viene corroborado también por la mediana. Vemos que es $6.61$ (menor que la media) con lo que nos está diciendo que el 50\% de los datos van a estar en el intervalo $[3.02, 6.61]$ y por tanto proporcionalmente esta cola será más pesada.
+
+Otra forma que tenemos de comprobar lo que hemos dicho es mediante el coeficiente de asimetría. Al ser positivo nos está indicando que la distribución es asimétrica a la derecha, cuestión que ya sabemos y hemos razonado.
+
+La curtosis nos está dando una indicación de cómo de puntiaguda o achatada es la distribución. En este caso el coeficiente es positivo, por lo que la distribución será más puntiaguda. Esto nos está indicando que vamos a tener una mayor concentración de datos entorno a la media.
+
+\subsubsection*{Variable 1: 1Y-CMaturityRate}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_1Y_CMaturityRate.png}
+	\caption{Estadísticos de la variable 1 1Y\_CMaturityRate}
+\end{figure}
+
+En primer lugar podemos observar que la media es de $97.35363$ y la mediana es ligeramente inferior. Esto nos vuelve a indicar que vamos a tener una cola más corta a la izquierda y una más larga a la derecha, es decir, vamos a tener más valores a la derecha de la distribución. Podemos corroborar este hecho también comprobando el mínimo y el máximo. Como podemos ver el máximo está mucho más alejado de la media que el mínimo por lo que podemos intuir que la distribución va a ser más alargada por ese lado.
+
+De igual forma si miramos el coeficiente de asimetría vemos que es positivo lo que nos está indicando la asimetría de la cola derecha.
+
+La curtosis es positiva pero no muy lejana del cero, por lo que tendrá la forma de una normal pero un poco más puntiaguda.
+
+\subsubsection*{Variable 2: 30Y-CMortgageRate}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_30Y_CMortgageRate.png}
+	\caption{Estadísticos de la variable 2 30Y\_CMortgageRate}
+\end{figure}
+
+Podemos ver que la media es $7.543937$ y la mediana $6.71$ lo que de nuevo nos hace sospechar que la cola derecha es más alargada. Esto lo podemos ver (y podemos decir ya que la cola va a ser bastante alargada) con el máximo y el mínimo. Sabemos que el 95\% de los datos debería de estar en el intervalo $[ media-2*stdv, media+2*stdv ]$ pero la realidad es que observamos que la cola derecha es más larga. Asimismo vemos que la moda es aún menor que la mediana con lo que corroboramos que la cola izquierda es más pesada y la derecha más alargada.
+
+El coeficiente de asimetría nos termina de corroborar lo que estamos infiriendo pues al ser positivo nos indica una asimetría en la cola derecha.
+
+En cuanto a la curtosis podemos ver que es más puntiaguda que una normal.
+
+\subsubsection*{Variable 3: 3M-Rate-AuctionAverage}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_3M_Rate_AuctionAverage.png}
+	\caption{Estadísticos de la variable 3 3M\_Rate\_AuctionAverage}
+\end{figure}
+
+Esta variable tiene como media $10.40085$ y mediana $9.9$. En esta variable no vemos una diferencia tan grande por lo que a priori podemos pensar que no es muy asimétrica. La desviación típica es de $2.958872$ por lo que (en caso de que fuese una normal) el 95\% de los datos se van a encontrar en el intervalo $[4.483106, 16.318594]$. Vemos que el mínimo es $6.49$ con lo que podemos entender que la cola izquierda es más corta mientras que el máximo es $18.63$ con lo que la cola derecha va a ser algo más alargada.
+
+Si observamos los coeficiente de asimetría y curtosis podemos ver que el coeficiente de asimetría es positivo lo que nos indica que la distribución es asimétrica a la derecha y la curtosis es ligeramente negativa con lo que podemos decir que la distribución será algo más achatada que una distribución normal.
+
+\subsubsection*{Variable 4: 3M-Rate-SecondaryMarket}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_3M_Rate_SecondaryMarket.png}
+	\caption{Estadísticos de la variable 4 3M\_Rate\_SecondaryMarket}
+\end{figure}
+
+Podemos observar que el comportamiento de esta variable es el mismo que las anteriores y que va a tener una cola a la derecha más alargada. Esto es comprobable por todas las razones expuestas en las secciones anteriores.
+
+\subsubsection*{Variable 5: 3Y-CMaturityRate}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_3Y_CMaturityRate.png}
+	\caption{Estadísticos de la variable 5 3Y\_CMaturityRate}
+\end{figure}
+
+De igual forma los estadísticos de esta variable nos están arrojando la misma información que para el resto de variables con una cola derecha muy alargada. Podemos corroborar esta información por lo mismo que hemos dicho antes (mediana, media, máximo y míninimo) además de coeficiente de asimetría que al ser positivo nos indica que es asimétrica a la derecha.
+
+Por otro lado, al igual que en los casos previos, la curtosis nos indica que la distribución es más puntiaguda o apuntada que una distribución normal.
+
+\subsubsection*{Variable 6: 5Y-CMaturityRate}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_5Y_CMaturityRate.png}
+	\caption{Estadísticos de la variable 6 5Y\_CMaturityRate}
+\end{figure}
+
+En esta variable observamos también una cola derecha más alargada pero podemos observar que aquí no es una cola tan alargada como en los casos anteriores. 
+
+Si comprobamos la media y la mediana observamos que la mediana es menor que la media por lo que ya nos está apuntando a la asimetría pero si vemos la desviación típica y calculamos el intervalo en el que deberían estar el 95\% de los datos ($[2.349618, 13,885138]$) podemos percibir que la cola izquierda es más corta (pues el mínimo es $4.09$) y la cola derecha más alargada pues el máximo llega hasta $16.47$.
+
+Podemos decir que la asimetría derecha se manifiesta pero con menor intensidad como podemos percibir por el coeficiente de asimetría, pues aunque es positivo, es menor que en otros casos.
+
+En cuanto a la curtosis podemos ver que es ligeramente negativa pero muy cercana al cero por lo que podemos decir que la distribución esta ligerísimamente achatada con respecto a una normal aunque visualmente probablemente no pudiéramos distinguirlo.
+
+\subsubsection*{Variable 7: bankCredit}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_bankCredit.png}
+	\caption{Estadísticos de la variable 7 bankCredit}
+\end{figure}
+
+En este caso podemos ver que la mediana es más pequeña que la media por lo que podemos pensar de nuevo en que esta variable tiene una cola derecha más alargada. Si calculamos el intervalo en el que deberían de estar el 95\% de los datos ($[2.826608,13.8916]$) podemos apreciar esa tendencia a una cola derecha más pesada. 
+
+Aún así, si comprobamos el coeficiente de asimetría, podemos ver que se manifiesta la asimetría derecha pero de forma ligera como en la variable anterior pues el coeficiente no es tan grande como en otras variables que ya hemos analizado. 
+
+En cuanto a la curtosis tenemos una curtosis negativa lo que nos indica que la distribución está algo más achatada que su correspondiente distribución normal.
+
+\subsubsection*{Variable 8: currency}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_currency.png}
+	\caption{Estadísticos de la variable 8 currency}
+\end{figure}
+
+En este caso la mediana también es algo más pequeña que la media, pero si comprobamos el rango de valores de la variable ($[1130.9, 4809.2,]$) observamos que la diferencia no es tan significativa por lo que no podemos decir tan rápido que tenemos una cola derecha más alargada. Como vemos la desviación típica es de $1010.521$ por lo que el intervalo que debe contener el 95\% de los datos es $[618.635,4660,719]$. 
+
+Con esta información podemos apuntar que debe existir una ligera asimetría en la cola derecha porque el mínimo es mayor que el mínimo que nos da el intervalo del 95\% de los datos y el máximo es algo mayor que el máximo del intervalo del 95\%.
+
+Para contrastar esta información tenemos el coeficiente de asimetría que, al ser positivo, nos dice que la distribución presenta asimetría derecha pero podemos ver que es mucho más pequeño que en el resto de variables con lo que la asimetría no es tan pronunciada.
+
+En cuanto a la curtosis podemos ver que es negativa por lo que la distribución es más achatada que una distribución normal.
+
+\subsubsection*{Variable 9: demandDeposits}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_demandDeposits.png}
+	\caption{Estadísticos de la variable 9 demandDeposits}
+\end{figure}
+
+Como podemos observar tenemos que la mediana es menor que la media. Volvemos a tener una situación que nos lleva a pensar que tenemos una cola derecha más alargada que la izquierda.
+
+Si calculamos el intervalo en el que debe estar el 95\% de los datos ($[27.6969,485.9985]$) podemos observar que el máximo es algo más grande que el máximo de dicho intervalo e igualmente ocurre con el mínimo con lo que tenemos un desplazamiento de los datos hacia la derecha.
+
+El hecho viene refrendado por el coeficiente de asimetría que al ser positivo nos indica dicha asimetría derecha.
+
+En cuanto a la curtosis al tener una curtosis negativa estamos ante una distribución más achatada que en el caso de una normal.
+
+\subsubsection*{Variable 10: federalFunds}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_federalFunds.png}
+	\caption{Estadísticos de la variable 10 federalFunds}
+\end{figure}
+
+Podemos observar en esta variable el mismo comportamiento que venimos destacando del resto. Tenemos que la mediana es más pequeña que la media lo que nos indica que la cola derecha de la distribución debe ser algo más alargada.
+
+El intervalo en el que el 95\% de los datos debe caer es $[188.50522, 427.72558]$. Podemos ver que el máximo de este intervalo es ligeramente más grande que el máximo y el mínimo es ligeramente más grande que el del intervalo del 95\% por lo que podemos decir que si existe una asimetría derecha esta no es muy pronunciada.
+
+Podemos contrastar lo que estamos afirmando por el coeficiente de asimetría que es ligeramente positivo, por lo que se confirma lo que estamos razonando de que tenemos una ligera asimetría derecha.
+
+En cuanto a la curtosis tenemos que es negativa y grande por lo que será muy achatada con respecto a una normal de mismos parámetros.
+
+\subsubsection*{Variable 11: moneyStock}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_moneyStock.png}
+	\caption{Estadísticos de la variable 11 moneyStock}
+\end{figure}
+
+Podemos repetir exactamente el mismo razonamiento que hemos hecho anteriormente para argumentar la asimetría derecha, pero en este caso al comprobar el coeficiente de asimetría podemos ver que es mucho más pronunciada.
+
+En cuanto a la curtosis tenemos el comportamiento opuesto al de la variable anterior teniendo que la distribución es significativamente más puntiaguda o apuntada que su normal de mismos parámetros.
+
+\subsubsection*{Variable 12: moneyStock}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_checkableDeposits.png}
+	\caption{Estadísticos de la variable 12 checkableDeposits}
+\end{figure}
+
+Este es el primer ejemplo en el que podemos ver como la cola más alargada no va a ser la cola derecha sino la izquierda. En este caso, al igual que los anteriores, podemos ver que la mediana es menor que la media (aunque no mucho proporcionalmente al rango de valores que se toman). Esto podría indicarnos que la cola derecha continúa siendo algo más alargada que la izquierda, pero en este caso podemos apreciar que la moda (el valor más frecuente) es significativamente más grande que la media, por lo que no podemos intuir un comportamiento a priori. Tenemos información contradictoria, una parte nos dice que debemos tener la cola derecha más alargada y la otra nos está diciendo que la izquierda es la que debería ser más alargada.
+
+Para poder estudiar esta situación compleja recurrimos al coeficiente de asimetría. Como podemos ver en este caso es negativo pero ligeramente. Tal y como podíamos pensar la situación está razonablemente equilibrada aunque mostrando una ligera asimetría izquierda.
+
+En cuanto a la curtosis tenemos que es negativa y grande, por lo que estamos ante una distribución mucho más achatada que una distribución normal de mismos parámetros.
+
+\subsubsection*{Variable 13: savingsDeposits}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_savingsDeposits.png}
+	\caption{Estadísticos de la variable 13 savingsDeposits}
+\end{figure}
+
+El caso de esta variable es singular también. Podemos ver que la mediana es mayor que la media, la moda también por lo que podríamos pensar que la cola más alargada es la izquierda. 
+
+Por contra si miramos el intervalo míninimo y máximo podemos ver que lo más probable es que se extienda más la cola derecha pues el máximo es más grande proporcionamente a la media que el mínimo. 
+
+Para contrastar la información miramos el coeficiente de asimetría y observamos que, aunque es pequeño, es positivo. Esto nos indica que la distribución es asimétrica derecha.
+
+Si analizamos la curtosis podemos ver que es negativa lo que nos indica que la distribución es más achatada que una normal de mismos parámetros.
+
+\subsubsection*{Variable 14: tradeCurrencies}
+
+Los estadísticos que nos arroja esta variable son:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/estadisticos_tradeCurrencies.png}
+	\caption{Estadísticos de la variable 14 tradeCurrencies}
+\end{figure}
+
+En cuanto a esta variable podemos ver que la media es mayor (ligeramente) que la mediana y la moda es mucho menor que la media. Por contra tenemos que el mínimo es más significativo que el máximo en cuanto al intervalo de valores se refiere. En ese caso a priori no podemos decir nada.
+
+Si miramos el coeficiente de asimetría podemos contrastar esta información pues es muy cercano a cero y en este caso ligeramente negativo por lo que si podemos decir algo es que es ligeramente asimétrica la distribución a la izquierda.
+
+La curtosis es ligeramente negativa por lo que podemos decir que es un poco más achatada que su normal asociada.
+
 
 
 \end{document}
