@@ -1,7 +1,8 @@
 # En primer lugar vamos a visualizar el dataset de regresión.
 
 library(foreign)
-dataset_regresion<-read.arff("../..//DATOS/Datasets Regresion/treasury/treasury.dat")
+library(dplyr)
+dataset_regresion<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury.dat")
 dataset_regresion
 
 # Ahora vamos a ver el número de variables y el tipo de cada una.
@@ -45,3 +46,68 @@ for(i in 1:length(colnames(dataset_regresion))){
   cat("\t\t", "Máximo: ", estadisticos$maximo, "\n")
 }
 
+#######################################################################
+##             Estudio de correlación de las variables               ##
+#######################################################################
+
+obtainCorrelated<-function(varIndex, dataset, threshold=0.9){
+  combinations<-combn(varIndex,2)
+  
+  correlations<-vector("numeric", dim(combinations)[2])
+  
+  for(i in 1:dim(combinations)[2]){
+    pair<-combinations[,i]
+    correlations[i]<-cor(dataset[,pair[1]], dataset[,pair[2]], method = c("pearson", "kendall", "spearman"))
+  }
+  
+  for(i in 1:length(correlations)){
+    if(abs(correlations[i])>threshold){
+      cat("La pareja de variables: ", combinations[,i][1], ", ", combinations[,i][2], " tiene una correlación: ", correlations[i], "\n")
+    }
+  }
+}
+
+obtainCorrelated(1:(length(dataset_regresion)-1), dataset_regresion)
+
+# Vemos que la variable 2 esta altamente correlada con el resto, la quitamos y repetimos
+obtainCorrelated(c(1,3:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La variable 9 podemos quitarla tambien
+obtainCorrelated(c(1,3:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 4 podemos quitarla tambien
+obtainCorrelated(c(1,3,5:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 3 podemos quitarla tambien
+obtainCorrelated(c(1,5:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 12 podemos quitarla
+obtainCorrelated(c(1,5:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 5 podemos quitarla
+obtainCorrelated(c(1,6:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 6 la podemos quitar
+obtainCorrelated(c(1,7:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 8 podemos quitarla
+obtainCorrelated(c(1,7,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# Finalmente nos hemos quedado con las características 1,7,10,11,13,14,15
+obtainCorrelated(c(1,7,10:11,13:(length(dataset_regresion)-1)), dataset_regresion, -1)
+# Ahora merece la pena que veamos la correlación de las variables con la de salida
+
+
+corrSalida<-function(var,dataset){
+  for(v in var){
+    correlation<-cor(dataset[,v], dataset[,length(dataset)], method=c("pearson", "kendall", "spearman"))
+    cat("La correlación de la variable ", v, " con la salida es de: ", correlation, "\n")
+  }
+}
+
+var<-c(1,7,10,11,13,14,15)
+corrSalida(var, dataset_regresion)
+
+# Viendo la salida parece lógico que quitemos la variable 1 porque tiene una correlación baja
+var<-c(7,10,11,13,14,15)
+corrSalida(var, dataset_regresion)
