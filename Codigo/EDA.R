@@ -111,3 +111,12 @@ corrSalida(var, dataset_regresion)
 # Viendo la salida parece lógico que quitemos la variable 1 porque tiene una correlación baja
 var<-c(7,10,11,13,14,15)
 corrSalida(var, dataset_regresion)
+
+#######################################################################
+##                Valores perdidos (Missing values)                  ##
+#######################################################################
+
+# Vamos a ver si tenemos valores perdidos
+which(is.na(dataset_regresion))
+
+# No tenemos valores perdidos
