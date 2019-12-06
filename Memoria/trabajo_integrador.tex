@@ -308,6 +308,102 @@ Si miramos el coeficiente de asimetría podemos contrastar esta información pue
 
 La curtosis es ligeramente negativa por lo que podemos decir que es un poco más achatada que su normal asociada.
 
+\subsubsection{Estudio de la correlación de las variables}
 
+En esta sección vamos a estudiar la correlación entre variables que no son de salida y de dichas variables con la de salida para intentar ver cuales van a ser las más relevantes para nuestro estudio o si hay alguna variable que podamos quitar.
+
+En primer lugar vamos a hacer un estudio de la correlación entre las variables. Nuestro objetivo va a ser obtener aquellas que tienen alta correlación con otras variables, es decir, obtener aquellas variables que son explicadas por otras pues estas las podremos quitar.
+
+Por supuesto todo este estudio habrá que contrastarlo sobre los resultados de la regresión, pero podemos hacer hipótesis previas al ajuste de los modelos.
+
+El código que voy a emplear para el estudio es el siguiente:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.51]{./Imagenes/correlacion_entre_variables_codigo.png}
+	\caption{Código para el estudio de la correlación entre variables.}
+\end{figure}
+
+Para poder eliminar una variable de forma que estemos seguros de que no quitamos información debemos exigir que la correlación entre variables sea alta. En este caso como se puede ver en el código solamente vamos a mostrar las parejas de variables que presenten una correlación alta, en concreto que en valor absoluto sea mayor a $0.9$.
+
+Vamos a ver las parejas de variables que cumplen esta condición.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables1.png}
+	\caption{Primer filtrado de la correlación entre variables}
+\end{figure}
+
+Podemos observar claramente que la variable 2 tiene una correlación muy alta con otras variables, por lo que podemos eliminarla al ser explicada por las variables 3,4,5,6,7 y 11.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables2.png}
+	\caption{Correlación entre variables después de eliminar la segunda.}
+\end{figure}
+
+Podemos ver a su vez que la variable 9 tiene una correlación muy alta con las variables 10, 12, 14 y 15 por lo que podemos eliminarla.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables3.png}
+	\caption{Correlación entre variables después de eliminar la segunda y la novena.}
+\end{figure}
+
+La variable 4 podemos ver que tiene alta correlación con las variables 5,6,7 y 11 por lo que podemos quitarla también.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables4.png}
+	\caption{Correlación entre variables después de eliminar la segunda, la novena y la cuarta.}
+\end{figure}
+
+La tercera variable sigue manteniendo una alta correlación con las variables 6,7 y 12, por lo que podemos eliminarla.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables5.png}
+	\caption{Correlación entre variables después de eliminar la segunda, la novena, la cuarta y la tercera.}
+\end{figure}
+
+Podemos ver que la variable 12 y 5 tienen una alta correlación con otras tres que además  no se comparten por lo que podemos eliminar también ambas variables.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables6.png}
+	\caption{Correlación entre variables después de eliminar la segunda, la novena, la cuarta, la tercera, la duodécima y la quinta.}
+\end{figure}
+
+Podemos observar que la variable 6 y 8 tienen alta correlación con otras dos variables no compartidas, por lo que podemos eliminar ambas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables7.png}
+	\caption{Correlación entre variables después de eliminar la segunda, la novena, la cuarta, la tercera, la duodécima, la quinta, la sexta y la octava.}
+\end{figure}
+
+Finalmente nos hemos quedado con dos parejas únicamente por lo que ya no está tan claro la  eliminación de dichas variables. Vamos a parar por tanto el proceso de eliminación en este punto.
+
+Veamos la correlación entre variables que nos queda con las que hemos decidido mantener.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_entre_variables8.png}
+	\caption{Correlación entre variables después de hacer la limpieza de variables.}
+\end{figure}
+
+Finalmente por tanto nos hemos quedado con las variables 1,7,10,11,13,14 y 15.
+
+Sobre estas variables merece la pena estudiar su correlación con la variable de salida para ver que seguimos teniendo variables que explican el comportamiento de la salida.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/correlacion_variable_salida1.png}
+	\caption{Correlación de las variables no eliminadas con la variable de salida.}
+\end{figure}
+
+Podemos ver que las variables 7, 11, 13 y 15 tienen una correlación en valor absoluto mayor a $0.75$ con lo que estas variables nos van a resultar de mucho interés a la hora de realizar un modelo de regresión lineal.
+
+Todas estas hipótesis serán contrastadas en la sección de regresión al ajustar los modelos.
 
 \end{document}
