@@ -128,8 +128,18 @@ which(is.na(dataset_regresion))
 pairs(dataset_regresion, pch=16, col="deepskyblue")
 
 var<-c(7,10,11,13,14,15)
-pairs(dataset_regresion[,var], pch=16, col="deepskyblue")
+pairs(dataset_regresion[,c(var,16)], pch=16, col="deepskyblue")
 
 boxplot(dataset_regresion)
+boxplot(dataset_regresion[,c(-8,-9,-10,-14,-12,-15,-13)])
+boxplot(dataset_regresion[,c(-1,-8,-9,-10,-12,-15,-13,-14)])
 boxplot(dataset_regresion[,var])
+boxplot(dataset_regresion[,var][,c(1,3)])
+plot(dataset_regresion$bankCredit)
 
+#######################################################################
+##                Distribución de las variables                      ##
+#######################################################################
+library(plyr)
+library(psych)
+multi.hist(dataset_regresion)
