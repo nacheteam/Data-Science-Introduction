@@ -120,3 +120,16 @@ corrSalida(var, dataset_regresion)
 which(is.na(dataset_regresion))
 
 # No tenemos valores perdidos
+
+#######################################################################
+##                           Outliers                                ##
+#######################################################################
+
+pairs(dataset_regresion, pch=16, col="deepskyblue")
+
+var<-c(7,10,11,13,14,15)
+pairs(dataset_regresion[,var], pch=16, col="deepskyblue")
+
+boxplot(dataset_regresion)
+boxplot(dataset_regresion[,var])
+
