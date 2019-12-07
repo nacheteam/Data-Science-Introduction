@@ -418,4 +418,84 @@ En cuanto a los valores perdidos vamos a comprobar en primer lugar si tenemos va
 
 Como podemos comprobar no tenemos ningún valor perdido.
 
+\subsubsection{Outliers}
+
+Vamos a comprobar si tenemos outliers en nuestro conjunto de datos.
+
+En primer lugar vamos a ver un pairplot de las variables para ver si podemos distinguir algo visualmente.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.95]{./Imagenes/pairplot_todas.png}
+	\caption{Scatterplot de todas las variables dos a dos}
+\end{figure}
+
+Visualmente con tantas variables no podemos destacar ninguna anomalía. Vamos a centrarnos solamente en las variables que hemos decidido quedarnos del estudio previo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.95]{./Imagenes/pairplot_variables_seleccionadas.png}
+	\caption{Scatterplot de las variables seleccionadas}
+\end{figure}
+
+Como podemos ver no podemos destacar ningún outlier en el conjunto de datos de forma visual.
+
+De paso podemos ver que hemos hecho una selección de variables adecuada pues podemos observar una clara relación lineal con la salida.
+
+Vamos a ver ahora un boxplot de todas las variables.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/boxplot_todas.png}
+	\caption{Boxplot de las todas las variables}
+\end{figure}
+
+Podemos ver que por la diferencia de escalas no todas las variables son visibles. En las que podemos observar de forma adecuada podemos ver que no hay outliers que nos destaquen fuera del rango intercuartil. Por tanto podemos eliminarlas del boxplot para reducir la escala y poder ver el resto de variables.
+
+Para el siguiente boxplot vamos a quitar las variables 8, 9, 10, 12, 13, 14 y 15.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/boxplot_filtrado1.png}
+	\caption{Boxplot quitando las variables 8, 9, 10, 12, 13, 14 y 15}
+\end{figure}
+
+Podemos observar que la primera variable tiene una escala mayor que el resto, por lo que para poder continuar la tendremos que quitar. Si observamos sus valores podemos ver que tenemos algunas anomalías por encima. Al tener tantos valores por encima no podemos decir de forma tan clara que estos valores son anómalos pues podría ser un comportamiento esperado de la variable y por tanto a priori no debemos eliminar dichos valores.
+
+Eliminamos además la variable 1 para continuar con el estudio.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/boxplot_filtrado2.png}
+	\caption{Boxplot quitando las variables 1, 8, 9, 10, 12, 13, 14 y 15}
+\end{figure}
+
+Podemos observar que en este último boxplot tenemos muchas más anomalías, de hecho, todas las variables poseen valores fuera del rango intercuartil menos para la segunda variable.
+
+Podemos observar que la concentración de valores fuera de rango es muy grande por lo que no debemos eliminar dichos valores. Además este estudio es de todas las variables y no de las que hemos seleccionado para quedarnos. Veamos su boxplot.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/boxplot_filtrado3.png}
+	\caption{Boxplot manteniendo las variables seleccionadas.}
+\end{figure}
+
+Podemos ver que en las variables seleccionadas tenemos dos que poseen anomalías, vamos a estudiarlas en un boxplot aislado.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/boxplot_filtrado4.png}
+	\caption{Boxplot de las variables que parecen tener anomalías.}
+\end{figure}
+
+Como podemos observar tenemos que la variable moneyStock tiene valores anómalos pero muy densos por lo que no debemos quitarlos. En el caso de bankCredit vamos a estudiar su scatterplot.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{./Imagenes/scatterplot_bankCredit.png}
+	\caption{ScatterPlot de la variable bankCredit}
+\end{figure}
+
+Podemos ver que las anomalías que nos encontramos no son tal pues es un conjunto distribuido de forma casi uniforme.
+
 \end{document}
