@@ -143,3 +143,36 @@ plot(dataset_regresion$bankCredit)
 library(plyr)
 library(psych)
 multi.hist(dataset_regresion)
+
+normalityTest<-function(dataset, var=-1){
+  if(var==-1){
+    for(i in 1:length(dataset)){
+      cat("Test de normalidad para la variable ", i, "\n")
+      pvalue<-wilcox.test(dataset[,i])$p.value
+      cat("P-valor: ", pvalue, "\n")
+      if(pvalue<0.05){
+        cat("Como es menor a 0.05 se rechaza la hipótesis nula, no sigue una normal.")
+      }
+      else{
+        cat("Como es mayor a 0.05 no podemos rechazar la hipótesis nula y por tanto no podemos afirmar nada.")
+      }
+      cat("\n\n")
+    }
+  }
+  else{
+    for(i in var){
+      cat("Test de normalidad para la variable ", i, "\n")
+      pvalue<-wilcox.test(dataset[,i])$p.value
+      cat("P-valor: ", pvalue, "\n")
+      if(pvalue<0.05){
+        cat("Como es menor a 0.05 se rechaza la hipótesis nula, no sigue una normal.")
+      }
+      else{
+        cat("Como es mayor a 0.05 no podemos rechazar la hipótesis nula y por tanto no podemos afirmar nada.")
+      }
+      cat("\n\n")
+    }
+  }
+}
+
+normalityTest(dataset_regresion)
