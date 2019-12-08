@@ -192,7 +192,8 @@ normalityTest(dataset_regresion)
 ###############################################################################################
 ###############################################################################################
 
-dataset_clasificacion<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heaet/heart.dat")
+dataset_clasificacion<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart.dat", header=FALSE, comment.char = "@")
+colnames(dataset_clasificacion)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
 dataset_clasificacion
 
 # Ahora vamos a ver el número de variables y el tipo de cada una.
@@ -200,4 +201,20 @@ cat("El número de variables es: ", length(colnames(dataset_clasificacion)), "\n
 cat("El tipo de las variables es:\n")
 for(i in 1:length(colnames(dataset_clasificacion))){
   cat("\t",colnames(dataset_clasificacion)[i], ": ", class(dataset_clasificacion[i][[1]]), "\n")
+}
+
+# Ahora vamos a calcular los estadísticos de las variables
+
+cat("\n\n\n", "Estadísticos de las columnas:\n")
+for(i in 1:length(colnames(dataset_regresion))){
+  cat("\t", colnames(dataset_regresion)[i], ":", "\n")
+  estadisticos<-calculaEstadisticos(dataset_regresion[,i])
+  cat("\t\t", "Media: ", estadisticos$media, "\n")
+  cat("\t\t", "Mediana: ", estadisticos$mediana, "\n")
+  cat("\t\t", "Desviación típica: ", estadisticos$stdv, "\n")
+  cat("\t\t", "Moda: ", estadisticos$moda, "\n")
+  cat("\t\t", "Kurtosis: ", estadisticos$kurtosis, "\n")
+  cat("\t\t", "Asimetría: ", estadisticos$asimetria, "\n")
+  cat("\t\t", "Mínimo: ", estadisticos$minimo, "\n")
+  cat("\t\t", "Máximo: ", estadisticos$maximo, "\n")
 }
