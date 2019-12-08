@@ -634,7 +634,17 @@ Vamos a realizar el estudio del conjunto completo dividiéndolo en dos partes, l
 
 \subsubsection*{Salida}
 
+Vamos a ver los estadísticos que nos da la variable de salida o lo que es lo mismo, la clase asociada a cada instancia.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_class.png}
+	\caption{Estadísticos de la variable de salida.}
+\end{figure}
+
+Para poder analizar los estadísticos de esta variable tenemos que tener en cuenta que es una variable que sólo tiene dos posibles valores: 1 y 2. 
+
+La media es $1.444444$ por lo que podemos decir que seguramente encontraremos un número mayor de instancias de la clase 1 que de la clase 2, pues si fuera al contrario la media debería ser más grande que $1.5$. Este hecho es también contrastable por el valor de la moda, o lo que es lo mismo, el valor más frecuente. La moda es $1$ por lo que ya sabemos que hay más instancias de la clase 1 que de la 2. En este caso estudiar la distribución carece de sentido por tomar únicamente dos valores, por lo que no estudiaremos la asimetría ni la curtosis.
 
 \subsubsection*{Variable 1: 1Y-CMaturityRate}
 
