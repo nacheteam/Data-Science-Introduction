@@ -1016,6 +1016,102 @@ En este problema no es tan sencillo decir que un valor es anómalo frente al res
 
 \subsubsection{Distribución de las variables}
 
+Vamos a estudiar la distribución de las variables con un histograma de todas las variables.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{./Imagenes/EDA/Clasificacion/histograma_todas.png}
+	\caption{Histograma de todas las variables.}
+\end{figure}
+
+En primer lugar cabe decir que los histogramas de las variables que toman muy pocos valores carecen de sentido pues van a salir degenerados. Este es el caso de las variables Sex, ChestPainType, FastingBloodSugar, etc.
+
+En un estudio visual podemos ver que hay algunas variables que puede que tengan una distribución normal. Vamos a ver si podemos decir algo acerca de esto con un test de normalidad.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad1.png}
+	\caption{Test de normalidad para la variable 1.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad2.png}
+	\caption{Test de normalidad para la variable 2.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad3.png}
+	\caption{Test de normalidad para la variable 3.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad4.png}
+	\caption{Test de normalidad para la variable 4.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad5.png}
+	\caption{Test de normalidad para la variable 5.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad6.png}
+	\caption{Test de normalidad para la variable 6.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad7.png}
+	\caption{Test de normalidad para la variable 7.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad8.png}
+	\caption{Test de normalidad para la variable 8.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad9.png}
+	\caption{Test de normalidad para la variable 9.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad10.png}
+	\caption{Test de normalidad para la variable 10.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad11.png}
+	\caption{Test de normalidad para la variable 11.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad12.png}
+	\caption{Test de normalidad para la variable 12.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad13.png}
+	\caption{Test de normalidad para la variable 13.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/test_normalidad14.png}
+	\caption{Test de normalidad para la variable 14.}
+\end{figure}
+
+Como podemos comprobar, en todos los casos tenemos p-valores más pequeños que $0.05$ por lo que en todos los casos rechazamos la hipótesis nula y por tanto descartamos que ninguna de las variables siga una distribución normal.
 
 \end{document}
