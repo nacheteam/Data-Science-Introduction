@@ -206,9 +206,9 @@ for(i in 1:length(colnames(dataset_clasificacion))){
 # Ahora vamos a calcular los estadísticos de las variables
 
 cat("\n\n\n", "Estadísticos de las columnas:\n")
-for(i in 1:length(colnames(dataset_regresion))){
-  cat("\t", colnames(dataset_regresion)[i], ":", "\n")
-  estadisticos<-calculaEstadisticos(dataset_regresion[,i])
+for(i in 1:length(colnames(dataset_clasificacion))){
+  cat("\t", colnames(dataset_clasificacion)[i], ":", "\n")
+  estadisticos<-calculaEstadisticos(dataset_clasificacion[,i])
   cat("\t\t", "Media: ", estadisticos$media, "\n")
   cat("\t\t", "Mediana: ", estadisticos$mediana, "\n")
   cat("\t\t", "Desviación típica: ", estadisticos$stdv, "\n")
@@ -218,3 +218,13 @@ for(i in 1:length(colnames(dataset_regresion))){
   cat("\t\t", "Mínimo: ", estadisticos$minimo, "\n")
   cat("\t\t", "Máximo: ", estadisticos$maximo, "\n")
 }
+
+#######################################################################
+##             Estudio de correlación de las variables               ##
+#######################################################################
+
+obtainCorrelated(1:(length(dataset_clasificacion)-1), dataset_clasificacion, threshold = -1)
+
+# Viendo la salida parece lógico que quitemos la variable 1 porque tiene una correlación baja
+corrSalida(1:(length(dataset_clasificacion)-1), dataset_clasificacion)
+
