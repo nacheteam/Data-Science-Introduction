@@ -646,65 +646,227 @@ Para poder analizar los estadísticos de esta variable tenemos que tener en cuen
 
 La media es $1.444444$ por lo que podemos decir que seguramente encontraremos un número mayor de instancias de la clase 1 que de la clase 2, pues si fuera al contrario la media debería ser más grande que $1.5$. Este hecho es también contrastable por el valor de la moda, o lo que es lo mismo, el valor más frecuente. La moda es $1$ por lo que ya sabemos que hay más instancias de la clase 1 que de la 2. En este caso estudiar la distribución carece de sentido por tomar únicamente dos valores, por lo que no estudiaremos la asimetría ni la curtosis.
 
-\subsubsection*{Variable 1: 1Y-CMaturityRate}
+\subsubsection*{Variable 1: Age}
 
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable1.png}
+	\caption{Estadísticos de la variable 1.}
+\end{figure}
 
-\subsubsection*{Variable 2: 30Y-CMortgageRate}
+En primer lugar cabe decir que esta variable es de tipo entero. Podemos ver que el intervalo en el que se mueven los valores es $[29,77]$. 
 
+Como podemos ver la media, la mediana y la moda están muy próximas entre sí por lo que la distribución debe estar centrada. Este hecho se puede contrastar con el coeficiente de asimetría que aunque es negativo está muy cercano a $0$ lo que nos indica que la distribución es prácticamente simétrica.
 
+En cuanto a la curtosis podemos ver que es negativa por lo que la distribución es más achatada que su normal homóloga en parámetros.
 
-\subsubsection*{Variable 3: 3M-Rate-AuctionAverage}
+\subsubsection*{Variable 2: Sex}
 
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable2.png}
+	\caption{Estadísticos de la variable 2.}
+\end{figure}
 
-\subsubsection*{Variable 4: 3M-Rate-SecondaryMarket}
+Esta variable es de tipo entero y sólo puede tomar dos valores: $0$ y $1$, siendo cada uno de los números el sexo masculino o femenino. Podemos ver que la media es $0.6777778$ por lo que hay más valores de $1$ que de $0$ y por tanto debe haber un género predominante sobre el otro dentro de los datos.
 
+Al ser una variable que sólo puede tomar dos valores no tiene sentido que estudiemos la distribución de la variable.
 
+\subsubsection*{Variable 3: ChestPainType}
 
-\subsubsection*{Variable 5: 3Y-CMaturityRate}
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable3.png}
+	\caption{Estadísticos de la variable 3.}
+\end{figure}
 
+Esta variable es de tipo entero y toma valores en el intervalo $[1,4]$ indicando el tipo de dolor de pecho que posee el paciente. La media y la mediana no tienen sentido en este caso pues no son fácilmente interpretables. Al no ser algo binario no podemos establecer en qué grado aparece un valor sobre otro.
 
-\subsubsection*{Variable 6: 5Y-CMaturityRate}
+Lo que si nos puede ser útil de analizar es la moda. Podemos ver que toma valor $4$, o lo que es lo mismo, el dolor de pecho más típico es aquel que va asociado con el número $4$.
 
+Algo que sí podemos decir sobre esta variable es que está desplazada hacia la derecha y debería de tener una cola más pesada a la derecha y más alargada a la izquierda. Esto lo podemos intuir pues la desviación típica es cercana a $1$ y por tanto el intervalo que contiene el 95\% de los datos debería de ser $[1,5]$ aproximadamente, por lo que vemos que está desplazada a la derecha con respecto al intervalo $[1,4]$.
 
+Este dato es comprobable también por el coeficiente de asimetría que es negativo y por tanto nos indica que la distribución es asimétrica a la izquierda. En cuanto a la curtosis podemos ver que es negativa y por tanto la distribución debe ser algo más achatada que una distribución normal de mismos parámetros.
 
-\subsubsection*{Variable 7: bankCredit}
+\subsubsection*{Variable 4: RestBloodPressure}
 
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable4.png}
+	\caption{Estadísticos de la variable 4.}
+\end{figure}
 
-\subsubsection*{Variable 8: currency}
+Esta es también una variable de tipo entero. Podemos ver que toma valores en el intervalo $[94, 200]$. La media y la mediana están muy próximas entre sí por lo que podemos pensar que la distribución está centrada. Por contra si miramos la moda es de $120$ por lo que podemos intuir una asimetría en la distribución.
 
+Si miramos el coeficiente de asimetría tenemos que es positivo por lo que la distribución es asimétrica a la derecha. Esto nos indica que la cola de la derecha es algo más alargada que la de la izquierda. En cuanto a la curtosis podemos ver que es positiva por lo que la distribución es más apuntada que su distribución normal asociada de mismos parámetros.
 
+\subsubsection*{Variable 5: SerumCholestoral}
 
-\subsubsection*{Variable 9: demandDeposits}
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable5.png}
+	\caption{Estadísticos de la variable 5.}
+\end{figure}
 
+Esta variable también es de tipo entero. El intervalo en el que toma valores es $[126,564]$. Si observamos la media y la mediana están próximas, por contra la moda es significativamente menor que ambas por lo que nos puede dar a intuir una asimetría derecha con una cola de la distribución algo más alargada.
 
-\subsubsection*{Variable 10: federalFunds}
+Este hecho viene dado por el coeficiente de asimetría. Como podemos ver es positivo y además lo suficientemente grande como para que podamos decir que la asimetría es notable. Este hecho puede no ser tan sencillo de deducir a partir de los datos porque la variable es de tipo entero. Esto puede hacer que haya algunos valores más frecuentes que otros y por tanto la asimetría no sea tan evidente a través de los estadísticos básicos. 
 
+Otro valor muy significativo es la curtosis que podemos ver que es positiva y muy grande, lo que nos está indicando que la distribución es extremadamente puntiaguda y por tanto podemos pensar que el argumento anterior (hay valores mucho más frecuentes que otros) es algo a tener en cuenta.
 
+\subsubsection*{Variable 6: FastingBloodSugar}
 
-\subsubsection*{Variable 11: moneyStock}
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable6.png}
+	\caption{Estadísticos de la variable 6.}
+\end{figure}
 
+La variable FastingBloodSugar es de tipo entero y sólo puede tomar dos valores: $0$ y $1$. Si vemos la media tenemos que es $0.1481481$ por lo que podemos decir que hay muchas más instancias que toman valor $0$ frente a las que toman valor $1$. El equilibrio, es decir si hubiera el mismo número de $0$ que de $1$, sería $0.5$ por lo que podemos ver el desequilibrio de valores. La moda es $0$ también por lo que corroboramos que este es el valor más frecuente.
 
-\subsubsection*{Variable 12: moneyStock}
+En cuanto a la curtosis y asimetría no nos aportan más información que la ya razonada pues estamos ante una variable binaria.
 
+\subsubsection*{Variable 7: ResElectrocardiographic}
 
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
-\subsubsection*{Variable 13: savingsDeposits}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable7.png}
+	\caption{Estadísticos de la variable 7.}
+\end{figure}
 
+Esta variable es también de tipo entero y podemos ver que toma valores en el intervalo $[0,2]$ por lo que sólo puede tomar los valores $0$, $1$ y $2$.La media es cercana a $1$ por lo que pueden pasar dos cosas con los valores de esta variable: la primera es que los valores que toman las 3 variables estén equilibrados y la segunda es que las ocurrencias de $0$ y $2$ estén equilibradas.
 
+La moda es 2, cosa que podemos ver pues la media es ligeramente superior a $1$. Como tenemos una variable muy simple (sólo toma tres valores) el coeficiente de asimetría no nos da más información que la media, pudiendo corroborar que la distribución es simétrica. En cuanto a la curtosis podemos  ver que es mucho más achatada que su distribución normal asociada, por lo que podemos intuir que habrá menos ocurrencias del valor $1$ frente al $0$ y $2$.
 
-\subsubsection*{Variable 14: tradeCurrencies}
+\subsubsection*{Variable 8: MaxHeartRate}
 
+Vamos a estudiar los estadísticos que nos arroja la variable.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable8.png}
+	\caption{Estadísticos de la variable 8.}
+\end{figure}
+
+La variable MaxHeartRate es de tipo entero. Podemos ver que toma valores en el intervalo $[71,202]$. La media y la mediana están razonablemente cercanas pero la moda es sustancialmente mayor a ambas, lo que nos está indicando que la cola izquierda debe ser algo más alargada que la derecha. Esto podríamos intentar razonarlo también calculando el intervalo en el que deberíamos encontrar el 95\% de los datos ($[103.34636,196.00924]$) pero en este caso no nos otorga mucha información.
+
+El coeficiente de asimetría es negativo lo que nos indica una asimetría a la izquierda. La curtosis es negativa pero muy cercana a $0$ por lo que podemos decir que la distribución estará ligeramente achatada.
+
+\subsubsection*{Variable 9: ExerciseInduced}
+
+Vamos a estudiar los estadísticos que nos arroja la variable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable9.png}
+	\caption{Estadísticos de la variable 9.}
+\end{figure}
+
+Esta variable es también de tipo entero y podemos ver que toma valores en el intervalo $[0,1]$ por lo que es binaria. La media es menor que $0.5$ lo que nos indica que hay más ocurrencias del valor $0$ que del valor $1$, cuestión que se refuerza al ver que la mediana y la moda son $0$.
+
+En cuanto a la curtosis y el coeficiente de asimetría carecen de sentido al no aportar mayor infomación en una variable binaria.
+
+\subsubsection*{Variable 10: Oldpeak}
+
+Vamos a estudiar los estadísticos que nos arroja la variable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable10.png}
+	\caption{Estadísticos de la variable 10.}
+\end{figure}
+
+Esta es la única variable del conjunto de datos que es de tipo real. Toma valores dentro del intervalo $[0,62]$ y podemos ver que la media es $8.9$. La mediana es tan solo $4$ por lo que podemos intuir que la cola derecha será muy alargada comparado con la izquierda. En cuanto a la moda podemos ver que el valor más frecuente es $0$.
+
+Si estudiamos la curtosis y asimetría podemos ver que la distribución es muy asimétrica a la derecha, lo que sustenta el razonamiento de la cola derecha más alargada. La curtosis es positiva y muy grande por lo que podemos ver que la distribución es mucho más puntiaguda o apuntada que la distribución de una normal de mismos parámetros.
+
+\subsubsection*{Variable 11: Slope}
+
+Vamos a estudiar los estadísticos que nos arroja la variable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable11.png}
+	\caption{Estadísticos de la variable 11.}
+\end{figure}
+
+La variable Slope es de tipo entero y toma valores dentro del intervalo $[1,3]$, por lo que sólo puede tomar $3$ valores distintos: $1$, $2$, y $3$. La media es $1.585185$ lo que nos indica que hay una descompensación hacia el $1$ teniendo más ocurrencias de éste valor.
+
+Este hecho lo podemos contrastar con el valor de la moda que es $1$. En cuanto a la mediana podemos ver que es $2$ lo que nos hace pensar que aproximadamente puede haber el mismo número de ocurrencias del valor $1$ que de los valores $2$ y $3$ juntos.
+
+El coeficiente de asimetría soporta estos razonamientos, pues es positivo indicándonos que la cola derecha es más alargada que la izquierda. En cuanto a la curtosis podemos ver que es negativa indicando que la distribución es más achatada que una normal de mismos parámetros.
+
+\subsubsection*{Variable 12: MajorVessels}
+
+Vamos a estudiar los estadísticos que nos arroja la variable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable12.png}
+	\caption{Estadísticos de la variable 12.}
+\end{figure}
+
+Esta variable es de tipo entero y toma valores en el intervalo $[0,3]$, por lo que sólo puede tomar $4$ valores distintos. Podemos ver que la media está entre $0$ y $1$ lo que nos lleva a pensar que debe haber más ocurrencias de valores $0$ que del resto. La moda y la mediana corroboran esta suposición. 
+
+La asimetría es positiva, lo que nos indica que la cola derecha debe ser más alargada que la izquierda. Por otro lado la curtosis es positiva pero no muy grande por lo que la distribución es ligeramente más apuntada que una normal de mismos parámetros.
+
+\subsubsection*{Variable 13: Thal}
+
+Vamos a estudiar los estadísticos que nos arroja la variable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/estadisticos_variable13.png}
+	\caption{Estadísticos de la variable 13.}
+\end{figure}
+
+La variable Thal es de tipo entero también y toma valores en el intervalo $[3,7]$. La media es $4.696296$ y la mediana y la moda $3$. Esto nos deja pensar que la distribución será aproximadamente simétrica pues no se percibe por estos estadísticos un desbalanceo acusado. El coeficiente de asimetría, aunque positivo, posee un valor muy cercano a cero. Por otro lado la curtosis es negativa y por tanto es más achatada que su distribución normal homóloga.
 
 \subsubsection{Estudio de la correlación de las variables}
 
+Vamos a estudiar la correlación entre variables por si puediéramos encontrar, como en el caso del conjunto de regresión, variables altamente correladas que se puedan eliminar.
 
+Veamos la correlación entre las variables:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/correlacion_entre_variables1.png}
+	\caption{Correlación entre las variables sin contar la de clase.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/correlacion_entre_variables2.png}
+	\caption{Correlación entre las variables sin contar la de clase.}
+\end{figure}
+
+Como podemos observar no hay ninguna variable altamente correlada con otra, por lo que no podemos simplificar el conjunto de datos.
+
+Este hecho puede venir de que la mayoría de variables son de tipo entero con muy pocos valores a tomar.
+
+Veamos ahora la correlación entre las variables con la variable de clase.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/correlacion_salida.png}
+	\caption{Correlación entre las variables con la de clase.}
+\end{figure}
+
+Podemos ver que no hay variables con un alto grado de correlación con la salida. Tendremos que comprobar con el ajuste de los modelos de clasificación el desempeño que obtenemos.
 
 \subsubsection{Valores perdidos}
 
