@@ -264,3 +264,13 @@ boxplot(dataset_clasificacion[,10]~dataset_clasificacion[,14], data=dataset_clas
 boxplot(dataset_clasificacion[,11]~dataset_clasificacion[,14], data=dataset_clasificacion)
 boxplot(dataset_clasificacion[,12]~dataset_clasificacion[,14], data=dataset_clasificacion)
 boxplot(dataset_clasificacion[,13]~dataset_clasificacion[,14], data=dataset_clasificacion)
+
+
+#######################################################################
+##                Distribución de las variables                      ##
+#######################################################################
+library(plyr)
+library(psych)
+multi.hist(dataset_clasificacion)
+
+normalityTest(dataset_clasificacion)
