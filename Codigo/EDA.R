@@ -228,3 +228,11 @@ obtainCorrelated(1:(length(dataset_clasificacion)-1), dataset_clasificacion, thr
 # Viendo la salida parece lógico que quitemos la variable 1 porque tiene una correlación baja
 corrSalida(1:(length(dataset_clasificacion)-1), dataset_clasificacion)
 
+#######################################################################
+##                Valores perdidos (Missing values)                  ##
+#######################################################################
+
+# Vamos a ver si tenemos valores perdidos
+which(is.na(dataset_clasificacion))
+
+# No tenemos valores perdidos
