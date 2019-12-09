@@ -44,7 +44,7 @@ En esta primera sección vamos a hacer una exploración de los datos intentando 
 
 El conjunto de datos del que dispongo para realizar regresión es el conjunto ``treasury''. Vamos a analizar el conjunto de datos.
 
-En primer lugar el conjunto de datos dispone de  16 variables numéricas como podemos observar con el siguiente código.
+En primer lugar el conjunto de datos dispone de  16 variables numéricas y 1049 observaciones como podemos observar con el siguiente código.
 
 \begin{figure}[H]
 	\centering
@@ -616,7 +616,7 @@ Como podemos ver por los resultados del test podemos rechazar en todos los casos
 
 El conjunto con el que vamos a atacar el problema de clasificación es el conjunto de datos ``heart''. Vamos a analizar este conjunto de datos antes de abordar el problema.
 
-El problema dispone de 14 variables, siendo la última la clase a la que pertenece cada instancia.
+El problema dispone de 14 variables y 270 observaciones, siendo la última la clase a la que pertenece cada instancia.
 
 Vamos a ver los tipos de las variables.
 
@@ -875,14 +875,144 @@ Vamos a comprobar si nuestro conjunto de clasificación tiene algún valor perdi
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/valores_perdidos.png}
-	\caption{Valores perdidos en el conjunto de clasificación}
+	\caption{Valores perdidos en el conjunto de clasificación.}
 \end{figure}
 
 Como podemos ver tenemos un conjunto sin valores perdidos, por lo que no tenemos que hacer mayores disquisiciones en este terreno.
 
 \subsubsection{Outliers}
 
+Vamos a observar primero un pairplot de todas las variables.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{./Imagenes/EDA/Clasificacion/pairplot_todas.png}
+	\caption{Pairplot de todas las variables.}
+\end{figure}
+
+En este pairplot no podemos ver demasiada información pero sí podemos intuir que hay dos tipos de variables: las que producen nubes de puntos y las que producen líneas separadas.
+
+Vamos a verlas por separado.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{./Imagenes/EDA/Clasificacion/pairplot_seleccionadas.png}
+	\caption{Pairplot de las variables que producen nubes de puntos.}
+\end{figure}
+
+Aquí podemos observar las variables. Podemos ver que hay algunos puntos anómalos pero no tienen por qué representar un problema en un principio. Otra cosa que podemos ver es que estas variables no forman dos clúster separados, cosa que puede ser conflictiva al ajustar los modelos.
+
+Vamos a ver el pairplot del resto de variables.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{./Imagenes/EDA/Clasificacion/pairplot_seleccionadas2.png}
+	\caption{Pairplot de las variables que forman líneas}
+\end{figure}
+
+De estos gráficos no podemos sacar demasiada información.
+
+Vamos a hacer ahora un boxplot de todas las variables.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/boxplot_todas.png}
+	\caption{Boxplot de todas las variables.}
+\end{figure}
+
+Como podemos ver tenemos algunas anomalías o valores fuera de rango en las variables 4, 5, 6, 8 y 10.
+
+Vamos a quitarlas para poder ver el resto.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/EDA/Clasificacion/boxplot_filtrado.png}
+	\caption{Boxplot eliminando variables.}
+\end{figure}
+
+Como podemos ver  tenemos algunos valores que están fuera de rango y tendremos que estudiar si esto afecta a la clasificación.
+
+Veamos también los boxplot dividiendo los valores por clases.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable1.png}
+	\caption{Boxplot de la variable 1.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable2.png}
+	\caption{Boxplot de la variable 2.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable3.png}
+	\caption{Boxplot de la variable 3.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable4.png}
+	\caption{Boxplot de la variable 4.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable5.png}
+	\caption{Boxplot de la variable 5.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable6.png}
+	\caption{Boxplot de la variable 6.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable7.png}
+	\caption{Boxplot de la variable 7.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable8.png}
+	\caption{Boxplot de la variable 8.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable9.png}
+	\caption{Boxplot de la variable 9.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable10.png}
+	\caption{Boxplot de la variable 10.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable11.png}
+	\caption{Boxplot de la variable 11.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable12.png}
+	\caption{Boxplot de la variable 12.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/EDA/Clasificacion/boxplot_variable13.png}
+	\caption{Boxplot de la variable 13.}
+\end{figure}
+
+En este problema no es tan sencillo decir que un valor es anómalo frente al resto. Al ser la mayoría de variables de tipo entero y con pocos valores simplemente puede que se esté dando el caso de que tengamos una concentración de valores mayor de uno de los posibles valores frente al resto y esto haga que los demás se consideren anómalos en el boxplot por cómo resulta el cálculo del rango intercuartil.
 
 \subsubsection{Distribución de las variables}
 
