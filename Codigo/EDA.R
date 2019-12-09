@@ -236,3 +236,31 @@ corrSalida(1:(length(dataset_clasificacion)-1), dataset_clasificacion)
 which(is.na(dataset_clasificacion))
 
 # No tenemos valores perdidos
+
+#######################################################################
+##                           Outliers                                ##
+#######################################################################
+
+pairs(dataset_clasificacion, pch=16, col="deepskyblue")
+
+# Vamos a quitar las variables que no son muy interesantes
+var<-c(-2,-3,-6,-7,-9,-11,-12,-13)
+pairs(dataset_clasificacion[,var], pch=16, col="deepskyblue")
+pairs(dataset_clasificacion[,c(-var, length(dataset_clasificacion))], pch=16, col="deepskyblue")
+
+boxplot(dataset_clasificacion)
+boxplot(dataset_clasificacion[,c(-1,-4,-5,-6,-8,-10)])
+
+boxplot(dataset_clasificacion[,1]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,2]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,3]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,4]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,5]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,6]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,7]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,8]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,9]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,10]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,11]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,12]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,13]~dataset_clasificacion[,14], data=dataset_clasificacion)
