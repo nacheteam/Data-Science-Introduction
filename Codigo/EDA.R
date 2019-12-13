@@ -274,3 +274,4 @@ library(psych)
 multi.hist(dataset_clasificacion)
 
 normalityTest(dataset_clasificacion)
+
