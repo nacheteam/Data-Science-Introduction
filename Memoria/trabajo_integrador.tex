@@ -1277,6 +1277,144 @@ El error cometido por los modelos coincide en la ordenación del $R^2$ ajustado.
 
 Los modelos de una sola variable ya nos proporcionan unos resultados realmente buenos teniendo el mejor de ellos un $R^2$ ajustado de $0.9893$, lo que nos va a dar un margen de mejora realmente escaso. Aún así vamos a continuar con modelos más complejos para ver si podemos mejorar este resultado.
 
+\section{Regresión lineal múltiple}
+
+En este apartado vamos a estudiar los modelos de regresión lineal múltiple. Para empezar esta sección vamos a ir de más a menos empezando con un modelo que emplee todas las variable y luego iremos eliminando las variables de menor calidad hasta obtener un modelo simple con un buen rendimiento.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/regresion_multiple1.png}
+	\caption{Resultados para el modelo con todas las variables.}
+\end{figure}
+
+Como podemos ver tenemos varias variables que proporcionan malos resultados o que no aportan información como la variable federalFunds.
+
+En cuanto al $R^2$ ajustado podemos ver que es $0.995$, lo que nos está indicando que el modelo es de mucha calidad en cuanto al ajuste, pero no podemos olvidar que el mejor resultado de los modelos de una única variable fue $0.9893$.
+
+Vamos a eliminar las variables de mala calidad para el ajuste como por ejemplo la variable federalFunds.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/regresion_multiple2.png}
+	\caption{Resultados eliminando la variable federalFunds.}
+\end{figure}
+
+Podemos ver que incluso el $R^2$ ajustado ha subido ligeramente. Esto no es porque el modelo haya mejorado su regresión eliminando una variable, sino porque el $R^2$ ajustado se calcula también en base al número de variables que participan en el modelo y al eliminar una podemos haber producido el aumento.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/regresion_multiple3.png}
+	\caption{Resultados eliminando la variable federalFunds y 3M-Rate-AuctionAverage.}
+\end{figure}
+
+Podemos ver que el valor de $R^2$ ajustado no ha variado al eliminar la variable 3M-Rate-AuctionAverage. Vamos a continuar eliminando la variable 3M-Rate-SecondaryMarket.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/regresion_multiple4.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage y 3M-Rate-SecondaryMarket.}
+\end{figure}
+
+Seguimos sin bajar en la bondad del ajuste, por lo que sabemos que estamos yendo en la buena dirección. Vamos a eliminar ahora la variable 5Y-CMaturityRate.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple5.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket y 5Y-CMaturityRate.}
+\end{figure}
+
+Como podemos ver hemos bajado ligeramente la bondad del ajuste al eliminar la última variable, pero la reducción ha sido tan baja que no es apreciable. Seguimos teniendo una variable que no está dando demasiado peso en el modelo y por tanto podríamos pensar en eliminarla. Vamos a ver qué ocurre cuando eliminamos la variable demandDeposits.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple6.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate y demandDeposits.}
+\end{figure}
+
+Vemos que seguimos manteniendo el ajuste. Vamos a ver si eliminamos ahora bankCredit.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple7.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits y bankCredit.}
+\end{figure}
+
+Podemos ver que ahora la variable savingsDeposits nos está dando un ajuste un poco peor que el resto. Como no hemos reducido el rendimiento del modelo podemos probar a eliminar esta variable para ver si empeoramos el ajuste.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple8.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit y savingsDeposits.}
+\end{figure}
+
+Podemos ver que hemos bajado un poco en el ajuste pero hemos reducido considerablemente la complejidad del modelo eliminando muchas variables. Podemos intentar eliminar alguna variable más aunque ya estamos en p-valores muy bajos, por lo que es probable que al eliminar alguna variable más ya si reduzcamos el desempeño del modelo de forma significativa. 
+
+Si comparamos los p-valores de las variables la siguiente candidata a ser eliminada del modelo sería currency. Vamos a ver los resultados que obtenemos si la eliminamos.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple9.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit, savingsDeposits y currency.}
+\end{figure}
+
+Seguimos teniendo un modelo con buenos resultados y ahora podemos ver que la variable que empeora el resultado del modelo debería ser loansLeases, por lo que podemos eliminarla y ver si obtenemos resultados mucho peores o mantenemos la línea de ajuste.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple10.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit, savingsDeposits, currency y loansLeases.}
+\end{figure}
+
+El ajuste no ha empeorado y de nuevo tenemos una situación en la que no podemos eliminar a priori ninguna de las variables. La que tiene un p-valor más grande es checkableDeposits.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple11.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit, savingsDeposits, currency, loansLeases y checkableDeposits.}
+\end{figure}
+
+El ajuste no ha empeorado casi el modelo por lo que vamos a continuar reduciendo el problema. Podemos ver que de todas las variables iniciales, las que explican el problema y lo resuelven son muchas menos. Vamos a eliminar la variable 30Y-CMortgageRate.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple12.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit, savingsDeposits, currency, loansLeases, checkableDeposits y 30Y-CMortgageRate.}
+\end{figure}
+
+Estamos empeorando en el ajuste de forma muy ligera pero merece la pena por la tremenda simplificación del problema. Como podemos ver todavía tenemos las dos variables que mejor ajuste han producido por sí solas.
+
+Vamos a eliminar la variable con un p-valor mayor, que en este caso es 1Y-CMaturityRate.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple13.png}
+	\caption{Resultados eliminando la variable federalFunds, 3M-Rate-AuctionAverage, 3M-Rate-SecondaryMarket, 5Y-CMaturityRate, demandDeposits, bankCredit, savingsDeposits, currency, loansLeases, checkableDeposits, 30Y-CMortgageRate y 1Y-CMaturityRate.}
+\end{figure}
+
+Hemos obtenido un modelo mucho más reducido que el inicial que tiene un $R^2$ ajustado de $0.9942$, lo cual es más que lo que hemos obtenido en la mejor de las regresiones lineales simples. Hemos disminuido un poco el rendimiento, pues inicialmente partíamos de un modelo que tenía un $R^2$ ajustado de $0.9951$ pero he decidido sacrificar un poco de rendimiento (hemos bajado sólo $0.001$ en el $R^2$ ajustado) por simplificar enormemente el modelo.
+
+Claramente el modelo obtenido es superior al modelo simple pues mejoramos el rendimiento únicamente empleando dos variables más. Recordemos que el mejor rendimiento lo obtuvimos con la variable moneyStock que nos dió un $R^2$ ajustado de $0.9893$ y hemos subido el rendimiento a $0.9942$. Si queremos primar la simplicidad del modelo frente a un mejor rendimiento está claro que el modelo de una única variable es suficientemente bueno. Por contra si queremos un poco más de rendimiento a costa de aumentar ligeramente la complejidad de la solución podemos optar por el modelo de regresión múltiple de 3 variables que hemos generado.
+
+Recordemos que en la fase de EDA hicimos suposiciones sobre las variables que podíamos eliminar. En el estudio exploratorio concluimos que a priori parecían interesantes las variables 7,10,11,13,14 y 15. Veamos el desempeño de dicho modelo.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple14.png}
+	\caption{Resultados con las variables escogidas en el EDA.}
+\end{figure}
+
+Podemos ver que el rendimiento del modelo es incluso peor que el que nos proporciona la variable moneyStock por sí sola por lo que este modelo no es una buena opción.
+
+En cuanto a interacciones no lineales podemos probar con el modelo simple de 3 variables que hemos obtenido haciendo algunas transformaciones no lineales, pero debemos tener presente que es complicado obtener resultados mucho mejores que los que ya tenemos.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/regresion_multiple15.png}
+	\caption{Regresión con interacciones no lineales.}
+\end{figure}
+
+Como podemos ver por la fórmula que estamos aplicando estamos considerando todas las posibles interacciones cuadráticas que implican las 3 variables consideradas en el último modelo. Como podemos ver no obtenemos una mejora significativa, pues mejoramos el $R^2$ ajustado sólamente $0.0001$ por lo tanto no merece la pena.
+
 
 
 \end{document}
