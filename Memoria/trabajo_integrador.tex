@@ -1118,4 +1118,165 @@ En un estudio visual podemos ver que hay algunas variables que puede que tengan 
 
 Como podemos comprobar, en todos los casos tenemos p-valores más pequeños que $0.05$ por lo que en todos los casos rechazamos la hipótesis nula y por tanto descartamos que ninguna de las variables siga una distribución normal.
 
+\section{Regresión: Treasury}
+
+En esta sección vamos a abordar el problema de regresión dado por el conjunto de datos Treasury.
+
+Ya hemos analizado previamente las características del conjunto de datos y hemos hecho hipótesis de variables que podríamos quitar. Vamos a ver en esta sección si dichas hipótesis estaban fundamentadas o no.
+
+\subsection{Regresión lineal simple}
+
+En esta sección se va a resolver el primero de los apartados del problema de regresión. Para ello lo que se ha realizado es generar todos los modelos de regresión posibles con una sola variable para el problema dado.
+
+Como tenemos 16 variables en total en el conjunto de datos tendremos por tanto 15 modelos al final. De entre estos se nos ha pedido que escojamos los 5 mejores. Vamos a ver los resultados que los modelos nos otorgan y vamos a escoger en consecuencia los 5 mejores modelos.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va1.png}
+	\caption{Regresor con la variable 1Y-CMaturityRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va2.png}
+	\caption{Regresor con la variable 30Y-CMortgageRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va3.png}
+	\caption{Regresor con la variable 3M-Rate-AuctionAverage.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va4.png}
+	\caption{Regresor con la variable 3M-Rate-SecondaryMarket.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va5.png}
+	\caption{Regresor con la variable 3Y-CMaturityRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va6.png}
+	\caption{Regresor con la variable 5Y-CMaturityRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va7.png}
+	\caption{Regresor con la variable bankCredit.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va8.png}
+	\caption{Regresor con la variable currency.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va9.png}
+	\caption{Regresor con la variable demandDeposits.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va10.png}
+	\caption{Regresor con la variable federalFunds.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va11.png}
+	\caption{Regresor con la variable moneyStock.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va12.png}
+	\caption{Regresor con la variable checkableDeposits.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va13.png}
+	\caption{Regresor con la variable loansLeases.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va14.png}
+	\caption{Regresor con la variable savingsDeposits.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.55]{./Imagenes/Regresion/regresor_1va15.png}
+	\caption{Regresor con la variable tradeCurrencies.}
+\end{figure}
+
+Para poder discernir los modelos que mejor desempeño tienen vamos a analizar los valores de $R^2$ ajustado.
+
+Según los valores que hemos obtenido los 5 mejores modelos son:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Variable}       & \textbf{$R^2$ ajustado} \\ \hline
+		moneyStock              & 0.9893                  \\ \hline
+		3Y-CMaturityRate        & 0.9835                  \\ \hline
+		3M-Rate-SecondaryMarket & 0.9807                  \\ \hline
+		30Y-CMortgageRate       & 0.9551                  \\ \hline
+		5Y-CMaturityRate        & 0.8794                  \\ \hline
+	\end{tabular}
+\end{table}
+
+Aquí podemos intuir que estas variables van a ser extremadamente importantes en el problema de regresión pues por ellas solas obtienen ya un buen resultado.
+
+Vamos a ver las gráficas que obtienen y su línea predicha.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/abline_moneyStock.png}
+	\caption{Conjunto de datos y la línea obtenida por el modelo con la variable moneyStock.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/abline_3Y_CMaturityRate.png}
+	\caption{Conjunto de datos y la línea obtenida por el modelo con la variable 3Y-CMaturityRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/abline_3M_Rate_SecondaryMarket.png}
+	\caption{Conjunto de datos y la línea obtenida por el modelo con la variable 3M-Rate-SecondaryMarket.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/abline_30Y_CMortgageRate.png}
+	\caption{Conjunto de datos y la línea obtenida por el modelo con la variable 30Y-CMortgageRate.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.65]{./Imagenes/Regresion/abline_5Y_CMaturityRate.png}
+	\caption{Conjunto de datos y la línea obtenida por el modelo con la variable 5Y-CMaturityRate.}
+\end{figure}
+
+Como podemos observar el ajuste es muy bueno en las 4 primeras variables y en la segunda algo peor sobre todo cuanto mayores son los valores de la variable de salida.
+
+El error cometido por los modelos coincide en la ordenación del $R^2$ ajustado.
+
+Los modelos de una sola variable ya nos proporcionan unos resultados realmente buenos teniendo el mejor de ellos un $R^2$ ajustado de $0.9893$, lo que nos va a dar un margen de mejora realmente escaso. Aún así vamos a continuar con modelos más complejos para ver si podemos mejorar este resultado.
+
+
+
 \end{document}
