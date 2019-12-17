@@ -127,3 +127,159 @@ modelo.3Y_CMaturityRate
 modelo.3M_Rate_SecondaryMarket
 modelo.30Y_CMortgageRate
 modelo.5Y_CMaturityRate
+
+###########################################################################
+##                            Apartado 2                                 ##
+###########################################################################
+
+modelo1<-lm(`1MonthCDRate`~., dataset_regresion)
+summary(modelo1)
+
+# Quitamos federalFunds
+
+modelo2<-lm(`1MonthCDRate`~.-federalFunds, dataset_regresion)
+summary(modelo2)
+
+# Quitamos 3M-Rate-AuctionAverage
+modelo3<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`, dataset_regresion)
+summary(modelo3)
+
+# Quitamos 3M-Rate-SecondaryMarket
+modelo4<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`, dataset_regresion)
+summary(modelo4)
+
+# Quitamos 5Y-CMaturiryRate
+modelo5<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`, dataset_regresion)
+summary(modelo5)
+
+# Vamos a probar a quitar demandDeposits
+modelo6<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits, dataset_regresion)
+summary(modelo6)
+
+# Vamos a probar a quitar bankCredit
+modelo7<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit, dataset_regresion)
+summary(modelo7)
+
+# Vamos a probar a quitar savingsDeposits
+modelo8<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits, dataset_regresion)
+summary(modelo8)
+
+# Vamos a probar a quitar currency
+modelo9<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency, dataset_regresion)
+summary(modelo9)
+
+# Vamos a probar a quitar loansLeases
+modelo10<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases, dataset_regresion)
+summary(modelo10)
+
+# Vamos a probar a quitar checkableDeposits
+modelo11<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits, dataset_regresion)
+summary(modelo11)
+
+# Vamos a probar a quitar 30Y-CMortgageRate
+modelo12<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits-`30Y-CMortgageRate`, dataset_regresion)
+summary(modelo12)
+
+# Vamos a probar a quitar 1Y-CMaturityRate
+modelo13<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits-`30Y-CMortgageRate`-`1Y-CMaturityRate`, dataset_regresion)
+summary(modelo13)
+
+# Vamos a comprobar qué resultados obtiene el modelo con las variables que decidimos quedarnos en el EDA
+var<-c(7,10,11,13,14,15)
+names(dataset_regresion)[var]
+modelo14<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3M-Rate-SecondaryMarket`+`3Y-CMaturityRate`+currency+federalFunds+savingsDeposits+tradeCurrencies, dataset_regresion)
+summary(modelo14)
+
+# Quitamos las que tienen poca significancia
+modelo15<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3M-Rate-SecondaryMarket`+`3Y-CMaturityRate`+currency+savingsDeposits, dataset_regresion)
+summary(modelo15)
+
+# Si quisiéramos un modelo más simple podemos quitar 3M-Rate-SecondaryMarket
+modelo16<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3Y-CMaturityRate`+currency+savingsDeposits, dataset_regresion)
+summary(modelo16)
+
+# Finalmente nos hemos quedado con 4.
+# El modelo6 es el mejor y el modelo 9 es más simple con resultados muy parecidos. Merece la pena el ultimo.
+
+# Vamos a probar una dependencia cuadrática sobre estas variables aunque el resultado ya es lo suficientemente bueno.
+modelo17<-lm(`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies+`3Y-CMaturityRate`*`3Y-CMaturityRate`+moneyStock*moneyStock+tradeCurrencies*tradeCurrencies+`3Y-CMaturityRate`*moneyStock+`3Y-CMaturityRate`*tradeCurrencies+moneyStock*tradeCurrencies, dataset_regresion)
+summary(modelo17)
+# No hay ninguna mejora
+
+###########################################################################
+##                            Apartado 3                                 ##
+###########################################################################
+
+readFolds<-function(){
+  fold1.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tra.dat")
+  fold1.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tst.dat")
+  
+  fold2.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-2tra.dat")
+  fold2.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-2tst.dat")
+  
+  fold3.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-3tra.dat")
+  fold3.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-3tst.dat")
+  
+  fold4.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-4tra.dat")
+  fold4.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-4tst.dat")
+  
+  fold5.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-5tra.dat")
+  fold5.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-5tst.dat")
+  
+  folds<-list(fold1=list(train=fold1.train, test=fold1.test),
+              fold2=list(train=fold2.train, test=fold2.test),
+              fold3=list(train=fold3.train, test=fold3.test),
+              fold4=list(train=fold4.train, test=fold4.test),
+              fold5=list(train=fold5.train, test=fold5.test))
+  
+  return(folds)
+}
+
+folds<-readFolds()
+
+library(kknn)
+
+ejecutaKNN<-function(formula, folds, k, tt="test"){
+  errores<-vector(mode = "numeric", length = 5)
+  for(i in 1:5){
+    if(tt=="test"){
+      modelo.knn<-kknn(formula, folds[[i]]$train, folds[[i]]$test, k=k)
+      yprime=modelo.knn$fitted.values
+      errores[i]<-sum(abs(folds[[i]]$test$`1MonthCDRate`-yprime)^2)/length(yprime)
+    }
+    else{
+      modelo.knn<-kknn(formula, folds[[i]]$train, folds[[i]]$train, k=k)
+      yprime=modelo.knn$fitted.values
+      errores[i]<-sum(abs(folds[[i]]$train$`1MonthCDRate`-yprime)^2)/length(yprime)
+    }
+  }
+  return(list(errores=errores, media.errores=mean(errores)))
+}
+
+# Todas las  variables con k desde 3 hasta 55 a saltos de 2
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+
+# Ahora vamos a probar con las variables del mejor modelo de una variable
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+
+# Ahora vamos a probar con el mejor modelo lineal de 3 variables
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+
+###########################################################################
+##                            Apartado 4                                 ##
+###########################################################################
+
