@@ -348,4 +348,14 @@ pvalue
 rmas
 rmenos
 
+friedman.test(as.matrix(regr_train_alumnos)[,-1])
+friedman.test(as.matrix(regr_test_alumnos[,-1]))
+
+tam <-dim(regr_train_alumnos[,-1])
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(regr_train_alumnos[,-1]), groups, p.adjust= "holm", paired = T)
+
+tam <-dim(regr_test_alumnos[,-1])
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(regr_test_alumnos[,-1]), groups, p.adjust= "holm", paired = T)
 
