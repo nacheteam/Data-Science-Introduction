@@ -1415,6 +1415,170 @@ En cuanto a interacciones no lineales podemos probar con el modelo simple de 3 v
 
 Como podemos ver por la fórmula que estamos aplicando estamos considerando todas las posibles interacciones cuadráticas que implican las 3 variables consideradas en el último modelo. Como podemos ver no obtenemos una mejora significativa, pues mejoramos el $R^2$ ajustado sólamente $0.0001$ por lo tanto no merece la pena.
 
+\section{Algoritmo k-NN para regresión}
 
+En esta sección vamos a emplear el algoritmo KNN para regresión. Para ello vamos a aplicarlo primero con todas las variables, después con la que mejor resultado nos ha dado en los modelos de regresión simple y posteriormente con la mejor fórmula del modelo de regresión múltiple.
+
+Para comparar los algoritmos vamos a emplear el error en predicción en train y en test por cada fold y en media. A priori además no sabemos el valor que debemos emplear para K, por lo que vamos a hacer un estudio al respecto para elegir bien dicho valor variándolo entre 3 y 55 a saltos de 2.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn1.png}
+	\caption{Error en test del modelo KNN con todas las variables.}
+\end{figure}
+
+Podemos ver claramente que el valor de K para el que se obtiene el menor error es para $K=5$ donde obtenemos de media $0.04609969$ de error en los folds. Si estudiamos el error por fold vemos que tenemos los siguientes números:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Folds} & \textbf{Error} \\ \hline
+		1              & 0.07921098     \\ \hline
+		2              & 0.05298160     \\ \hline
+		3              & 0.02544653     \\ \hline
+		4              & 0.04156857     \\ \hline
+		5              & 0.03129077     \\ \hline
+	\end{tabular}
+\end{table}
+
+En cuanto al error en el train para cada valor de K obtenemos la siguiente gráfica:
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn2.png}
+	\caption{Error en train del modelo KNN con todas las variables.}
+\end{figure}
+
+Podemos ver que el menor error se comete con $K=3$ donde obtenemos un error medio de $0.00509912$ en la validación cruzada. El error cometido por cada fold es:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Fold} & \textbf{Error} \\ \hline
+		1              & 0.005395550     \\ \hline
+		2              & 0.004238368     \\ \hline
+		3              & 0.004765470     \\ \hline
+		4              & 0.005374334     \\ \hline
+		5              & 0.005721879     \\ \hline
+	\end{tabular}
+\end{table}
+
+Vamos a ver ahora el error que se comete empleando la mejor variable de los modelos lineales simples.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn3.png}
+	\caption{Error en test del modelo KNN con la variable moneyStock.}
+\end{figure}
+
+Podemos ver en esta gráfica que el modelo con una sola variable es muy dependiente del valor de K. El mejor valor que podemos tomar para este parámetro es $21$ ya que es el que menos error nos da en media en la validación cruzada. El error cometido en media en el test es $0.1237461$ y por cada fold:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Fold} & \textbf{Error} \\ \hline
+		1              & 0.15658084     \\ \hline
+		2              & 0.16779980     \\ \hline
+		3              & 0.10178984     \\ \hline
+		4              & 0.10885809     \\ \hline
+		5              & 0.08370183     \\ \hline
+	\end{tabular}
+\end{table}
+
+Veamos el error en el train:
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn4.png}
+	\caption{Error en train del modelo KNN con la variable moneyStock.}
+\end{figure}
+
+Como podemos ver en el caso del train el mejor resultado de error se obtiene para el valor de $K=3$. En este caso se comete un error de $0.06193327$. El error por folds es:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Fold} & \textbf{Error} \\ \hline
+		1              & 0.05902647     \\ \hline
+		2              & 0.05254069     \\ \hline
+		3              & 0.06674650     \\ \hline
+		4              & 0.06400127     \\ \hline
+		5              & 0.06735141     \\ \hline
+	\end{tabular}
+\end{table}
+
+Vamos a ver ahora el desempeño que tiene el modelo KNN con las tres variables que tomamos finalmente en el estudio de regresión múltiple.
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn5.png}
+	\caption{Error en test del modelo KNN con las variables 3Y-CMaturityRate, moneyStock y tradeCurrencies.}
+\end{figure}
+
+Podemos ver que el menor valor de error se produce con el valor $K=9$ siendo dicho error en media $0.05378016$. Si analizamos el error por fold podemos ver que obtenemos los siguientes resultados:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Fold} & \textbf{Error} \\ \hline
+		1              & 0.08178329     \\ \hline
+		2              & 0.06936034     \\ \hline
+		3              & 0.03370024     \\ \hline
+		4              & 0.04640869     \\ \hline
+		5              & 0.03764825     \\ \hline
+	\end{tabular}
+\end{table}
+
+Veamos ahora el mejor valor de K según el error cometido en el train y comparemos finalmente los modelos.
+
+El error cometido en media en el train según el valor de K es el siguiente:
+
+\begin{figure}[H]
+	\centering 
+	\includegraphics[scale=0.6]{./Imagenes/Regresion/knn6.png}
+	\caption{Error en train del modelo KNN con las variables 3Y-CMaturityRate, moneyStock y tradeCurrencies.}
+\end{figure}
+
+Podemos ver que el menor error se comete para el valor de K igual a $3$, donde se comete en media un error de $0.01161164$. Si analizamos el error por folds obtenemos los siguientes resultados:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Fold} & \textbf{Error} \\ \hline
+		1              & 0.00975913     \\ \hline
+		2              & 0.01180357     \\ \hline
+		3              & 0.01163929     \\ \hline
+		4              & 0.01197810     \\ \hline
+		5              & 0.01287809     \\ \hline
+	\end{tabular}
+\end{table}
+
+Vamos a comparar por tanto los modelos obtenidos. Para esta comparación vamos a tanto el error por folds en el test como el error medio cometido en los mismos. Se nos podría plantear en esta sección el dilema de si emplear el error en train o en test para hacer la comparativa o ambos incluso. Desde un punto de vista objetivo debemos usar el error cometido sobre el test. Nosotros estamos suponiendo que disponemos de datos que conocemos (los del train) y estamos entrenando el modelo con ellos para luego evaluarlo con unos datos nuevos simulando que son datos desconocidos para nosotros como si nos llegasen en una aplicación real del modelo. Por tanto lo más consistente es evaluarlo empleando el error cometido en el test.
+
+Veamos la siguiente tabla:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Folds}       & \textbf{Error modelo todas} & \textbf{Error moneyStock} & \textbf{Error modelo tres variables} \\ \hline
+		1                    & 0.07921098                  & 0.15658084                & 0.08178329                           \\ \hline
+		2                    & 0.05298160                  & 0.16779980                & 0.06936034                           \\ \hline
+		3                    & 0.02544653                  & 0.10178984                & 0.03370024                           \\ \hline
+		4                    & 0.04156857                  & 0.10885809                & 0.04640869                           \\ \hline
+		5                    & 0.03129077                  & 0.08370783                & 0.03764825                           \\ \hline
+		\textbf{Error medio} & 0.04609969                  & 0.1237461                 & 0.05378016                           \\ \hline
+	\end{tabular}
+\end{table}
+
+Podemos comprobar que el peor modelo en cuanto a error cometido es el modelo que emplea una única variable para el ajuste con KNN. Este modelo comete un error mayor en todos los folds comparado con los otros dos modelos del KNN, lo cual se hace evidente también en el error medio como era de esperar.
+
+Entre el modelo de tres variables y el modelo que hace uso de todas podemos ver que el modelo que comete un error menor es el modelo que emplea todas las variables. Esto es algo lógico pues lo vimos también en el ajuste de regresión lineal múltiple que con todas las variables obteníamos un buen resultado. En ese caso primamos la simplicidad que ganábamos frente a una pérdida de rendimiento menor. Si observamos la diferencia de errores cometidos es de $0.00768047$ en el error medio, lo cual es prácticamente insignificante y por tanto es muy lógico pensar que el modelo más simple de tres variables es una mejor opción que el modelo que hace uso de todas.
 
 \end{document}
