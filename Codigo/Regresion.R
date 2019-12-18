@@ -259,27 +259,93 @@ ejecutaKNN<-function(formula, folds, k, tt="test"){
 # Todas las  variables con k desde 3 hasta 55 a saltos de 2
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="test")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+resultados[,2]
 
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="train")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+resultados[,1]
 
 # Ahora vamos a probar con las variables del mejor modelo de una variable
 
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="test")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+resultados[,10]
 
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="train")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+resultados[,1]
 
 # Ahora vamos a probar con el mejor modelo lineal de 3 variables
 
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="test")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Gráfica de errores por valor de K para test")
+resultados[,4]
 
 resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="train")
 plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Gráfica de errores por valor de K para train")
+resultados[,1]
 
 ###########################################################################
 ##                            Apartado 4                                 ##
 ###########################################################################
+ejecutaLM<-function(formula, folds, tt="test"){
+  errores<-vector(mode = "numeric", length = 5)
+  for(i in 1:5){
+    if(tt=="test"){
+      modelo<-lm(formula, folds[[i]]$train)
+      yprime=predict(modelo,folds[[i]]$test)
+      errores[i]<-sum(abs(folds[[i]]$test$`1MonthCDRate`-yprime)^2)/length(yprime)
+    }
+    else{
+      modelo<-lm(formula, folds[[i]]$train)
+      yprime=predict(modelo,folds[[i]]$train)
+      errores[i]<-sum(abs(folds[[i]]$train$`1MonthCDRate`-yprime)^2)/length(yprime)
+    }
+  }
+  return(list(errores=errores, media.errores=mean(errores)))
+}
+
+ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="test")
+ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="train")
+
+regr_train_alumnos<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_train_alumnos.csv")
+regr_test_alumnos<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_test_alumnos.csv")
+
+#Sacamos las diferencias
+difs<-(regr_train_alumnos$out_train_lm - regr_train_alumnos$out_train_kknn)/regr_train_alumnos$out_train_lm
+
+#Construimos una nueva tabla donde si la diferencia es positiva asignamos 0 para Other
+#y abs(difs) para reference_algorithm y viceversa
+wilc_1_2<-cbind(ifelse(difs<0,abs(difs)+0.1, 0+0.1),ifelse(difs>0, abs(difs)+0.1,0+0.1))
+colnames(wilc_1_2) <-c(colnames(regr_train_alumnos)[1], colnames(regr_train_alumnos)[2])
+
+#Realizamos el test
+KNNvsLMtra<-wilcox.test(wilc_1_2[,1], wilc_1_2[,2],alternative="two.sided", paired=T)
+pvalue<-KNNvsLMtra$p.value
+rmas<-KNNvsLMtra$statistic
+LMvsKNNtra<-wilcox.test(wilc_1_2[,2], wilc_1_2[,1],alternative="two.sided", paired=T)
+rmenos<-LMvsKNNtra$statistic
+pvalue
+rmas
+rmenos
+
+
+#Repetimos para test
+difs<-(regr_test_alumnos$out_test_lm - regr_test_alumnos$out_test_kknn) /regr_test_alumnos$out_test_lm
+
+#Construimos una nueva tabla donde si la diferencia es positiva asignamos 0 para Other
+#y abs(difs) para reference_algorithm y viceversa
+wilc_1_2 <-cbind(ifelse(difs<0, abs(difs)+0.1,0+0.1),ifelse(difs>0, abs(difs)+0.1,0+0.1))
+colnames(wilc_1_2) <-c(colnames(regr_test_alumnos)[1], colnames(regr_test_alumnos)[2])
+
+#Realizamos el test
+KNNvsLMtest<-wilcox.test(wilc_1_2[,1], wilc_1_2[,2],alternative = "two.sided", paired=T)
+pvalue<-KNNvsLMtra$p.value
+rmas<-KNNvsLMtra$statistic
+LMvsKNNtest<-wilcox.test(wilc_1_2[,2], wilc_1_2[,1],alternative = "two.sided", paired=T)
+rmenos<-LMvsKNNtra$statistic
+pvalue
+rmas
+rmenos
+
 
