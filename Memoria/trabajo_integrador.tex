@@ -21,6 +21,16 @@
 \useunder{\uline}{\ul}{}
 
 
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily,
+	columns=fullflexible,
+	frame=single,
+	breaklines=true,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+
 \author{Ignacio Aguilera Martos}
 \title{Trabajo Integrador \\ Introducción a la Ciencia de Datos}
 \date{22 de Diciembre de 2019}
@@ -152,7 +162,7 @@ Los estadísticos que nos arroja esta variable son:
 	\caption{Estadísticos de la variable 5 3Y\_CMaturityRate}
 \end{figure}
 
-De igual forma los estadísticos de esta variable nos están arrojando la misma información que para el resto de variables con una cola derecha muy alargada. Podemos corroborar esta información por lo mismo que hemos dicho antes (mediana, media, máximo y míninimo) además de coeficiente de asimetría que al ser positivo nos indica que es asimétrica a la derecha.
+De igual forma los estadísticos de esta variable nos están arrojando la misma información que para el resto de variables con una cola derecha muy alargada. Podemos corroborar esta información por lo mismo que hemos dicho antes (mediana, media, máximo y minino) además de coeficiente de asimetría que al ser positivo nos indica que es asimétrica a la derecha.
 
 Por otro lado, al igual que en los casos previos, la curtosis nos indica que la distribución es más puntiaguda o apuntada que una distribución normal.
 
@@ -286,7 +296,7 @@ Los estadísticos que nos arroja esta variable son:
 
 El caso de esta variable es singular también. Podemos ver que la mediana es mayor que la media, la moda también por lo que podríamos pensar que la cola más alargada es la izquierda. 
 
-Por contra si miramos el intervalo míninimo y máximo podemos ver que lo más probable es que se extienda más la cola derecha pues el máximo es más grande proporcionamente a la media que el mínimo. 
+Por contra si miramos el intervalo minino y máximo podemos ver que lo más probable es que se extienda más la cola derecha pues el máximo es más grande proporcionalmente a la media que el mínimo. 
 
 Para contrastar la información miramos el coeficiente de asimetría y observamos que, aunque es pequeño, es positivo. Esto nos indica que la distribución es asimétrica derecha.
 
@@ -782,7 +792,7 @@ Vamos a estudiar los estadísticos que nos arroja la variable.
 
 Esta variable es también de tipo entero y podemos ver que toma valores en el intervalo $[0,1]$ por lo que es binaria. La media es menor que $0.5$ lo que nos indica que hay más ocurrencias del valor $0$ que del valor $1$, cuestión que se refuerza al ver que la mediana y la moda son $0$.
 
-En cuanto a la curtosis y el coeficiente de asimetría carecen de sentido al no aportar mayor infomación en una variable binaria.
+En cuanto a la curtosis y el coeficiente de asimetría carecen de sentido al no aportar mayor información en una variable binaria.
 
 \subsubsection*{Variable 10: Oldpeak}
 
@@ -842,7 +852,7 @@ La variable Thal es de tipo entero también y toma valores en el intervalo $[3,7
 
 \subsubsection{Estudio de la correlación de las variables}
 
-Vamos a estudiar la correlación entre variables por si puediéramos encontrar, como en el caso del conjunto de regresión, variables altamente correladas que se puedan eliminar.
+Vamos a estudiar la correlación entre variables por si pudiéramos encontrar, como en el caso del conjunto de regresión, variables altamente correladas que se puedan eliminar.
 
 Veamos la correlación entre las variables:
 
@@ -1277,7 +1287,7 @@ El error cometido por los modelos coincide en la ordenación del $R^2$ ajustado.
 
 Los modelos de una sola variable ya nos proporcionan unos resultados realmente buenos teniendo el mejor de ellos un $R^2$ ajustado de $0.9893$, lo que nos va a dar un margen de mejora realmente escaso. Aún así vamos a continuar con modelos más complejos para ver si podemos mejorar este resultado.
 
-\section{Regresión lineal múltiple}
+\subsection{Regresión lineal múltiple}
 
 En este apartado vamos a estudiar los modelos de regresión lineal múltiple. Para empezar esta sección vamos a ir de más a menos empezando con un modelo que emplee todas las variable y luego iremos eliminando las variables de menor calidad hasta obtener un modelo simple con un buen rendimiento.
 
@@ -1393,7 +1403,7 @@ Vamos a eliminar la variable con un p-valor mayor, que en este caso es 1Y-CMatur
 
 Hemos obtenido un modelo mucho más reducido que el inicial que tiene un $R^2$ ajustado de $0.9942$, lo cual es más que lo que hemos obtenido en la mejor de las regresiones lineales simples. Hemos disminuido un poco el rendimiento, pues inicialmente partíamos de un modelo que tenía un $R^2$ ajustado de $0.9951$ pero he decidido sacrificar un poco de rendimiento (hemos bajado sólo $0.001$ en el $R^2$ ajustado) por simplificar enormemente el modelo.
 
-Claramente el modelo obtenido es superior al modelo simple pues mejoramos el rendimiento únicamente empleando dos variables más. Recordemos que el mejor rendimiento lo obtuvimos con la variable moneyStock que nos dió un $R^2$ ajustado de $0.9893$ y hemos subido el rendimiento a $0.9942$. Si queremos primar la simplicidad del modelo frente a un mejor rendimiento está claro que el modelo de una única variable es suficientemente bueno. Por contra si queremos un poco más de rendimiento a costa de aumentar ligeramente la complejidad de la solución podemos optar por el modelo de regresión múltiple de 3 variables que hemos generado.
+Claramente el modelo obtenido es superior al modelo simple pues mejoramos el rendimiento únicamente empleando dos variables más. Recordemos que el mejor rendimiento lo obtuvimos con la variable moneyStock que nos dio un $R^2$ ajustado de $0.9893$ y hemos subido el rendimiento a $0.9942$. Si queremos primar la simplicidad del modelo frente a un mejor rendimiento está claro que el modelo de una única variable es suficientemente bueno. Por contra si queremos un poco más de rendimiento a costa de aumentar ligeramente la complejidad de la solución podemos optar por el modelo de regresión múltiple de 3 variables que hemos generado.
 
 Recordemos que en la fase de EDA hicimos suposiciones sobre las variables que podíamos eliminar. En el estudio exploratorio concluimos que a priori parecían interesantes las variables 7,10,11,13,14 y 15. Veamos el desempeño de dicho modelo.
 
@@ -1413,9 +1423,9 @@ En cuanto a interacciones no lineales podemos probar con el modelo simple de 3 v
 	\caption{Regresión con interacciones no lineales.}
 \end{figure}
 
-Como podemos ver por la fórmula que estamos aplicando estamos considerando todas las posibles interacciones cuadráticas que implican las 3 variables consideradas en el último modelo. Como podemos ver no obtenemos una mejora significativa, pues mejoramos el $R^2$ ajustado sólamente $0.0001$ por lo tanto no merece la pena.
+Como podemos ver por la fórmula que estamos aplicando estamos considerando todas las posibles interacciones cuadráticas que implican las 3 variables consideradas en el último modelo. Como podemos ver no obtenemos una mejora significativa, pues mejoramos el $R^2$ ajustado solamente $0.0001$ por lo tanto no merece la pena.
 
-\section{Algoritmo k-NN para regresión}
+\subsection{Algoritmo k-NN para regresión}
 
 En esta sección vamos a emplear el algoritmo KNN para regresión. Para ello vamos a aplicarlo primero con todas las variables, después con la que mejor resultado nos ha dado en los modelos de regresión simple y posteriormente con la mejor fórmula del modelo de regresión múltiple.
 
@@ -1580,5 +1590,1237 @@ Veamos la siguiente tabla:
 Podemos comprobar que el peor modelo en cuanto a error cometido es el modelo que emplea una única variable para el ajuste con KNN. Este modelo comete un error mayor en todos los folds comparado con los otros dos modelos del KNN, lo cual se hace evidente también en el error medio como era de esperar.
 
 Entre el modelo de tres variables y el modelo que hace uso de todas podemos ver que el modelo que comete un error menor es el modelo que emplea todas las variables. Esto es algo lógico pues lo vimos también en el ajuste de regresión lineal múltiple que con todas las variables obteníamos un buen resultado. En ese caso primamos la simplicidad que ganábamos frente a una pérdida de rendimiento menor. Si observamos la diferencia de errores cometidos es de $0.00768047$ en el error medio, lo cual es prácticamente insignificante y por tanto es muy lógico pensar que el modelo más simple de tres variables es una mejor opción que el modelo que hace uso de todas.
+
+\subsection{Test de significancia entre algoritmos}
+
+Queremos ver ahora si los algoritmos son significativamente diferentes por los resultados que nos han arrojado. Para ello primero vamos a hacer una comparativa entre los algoritmos KNN y regresión lineal múltiple con la configuración de todas las variables.
+
+Para empezar vamos a hacer la comparativa entre el modelo de regresión lineal múltiple y el modelo de KNN. Para hacer esta comparativa vamos a emplear el test de Wilcoxon que nos va a decir si las diferencias entre algoritmos son significativas. Para ello disponemos de dos archivos CSV que contienen los resultados de un modelo de regresión lineal, un KNN y un M5P para distintos conjuntos de datos. En esta hoja se han introducido los errores cometidos por los mejores modelos conseguidos para regresión lineal y para KNN en el conjunto treasury que es el que hemos estudiado en este trabajo.
+
+Con esto hecho podemos realizar el test de Wilcoxon entre los modelos de regresión lineal y KNN. 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Datos} & \textbf{$R^+$} & \textbf{$R^-$} & \textbf{P-value} \\ \hline
+		\textbf{Test}  & 92             & 79             & 0.7987061        \\ \hline
+		\textbf{Train} & 10             & 161            & 0.000328064      \\ \hline
+	\end{tabular}
+\end{table}
+
+Como podemos ver por el p-valor las diferencias que encontramos en el test no son significativas, es decir, los algoritmos no son estadísticamente diferentes. En cuanto al train podemos ver que sí existe dicha diferencia y por tanto son significativamente diferentes. De hecho podemos decir que con un $99.9671936\%$ de probabilidad los algoritmos son diferentes.
+
+Creo que igual que hemos comentado antes la comparativa justa es en el test, pues es el conocimiento que nos viene nuevo al modelo y con el que no se ha entrenado. Lo que sí podemos decir por los resultados del train es que, al ser significativamente diferentes y ser el mejor modelo el KNN podemos decir que KNN se ajusta muy bien al conjunto de train y por tanto podemos estar ante un posible sobreajuste ya que dicha significancia no se mantiene en el test.
+
+Como en test no hemos visto diferencias significativas vamos a aplicar el test de Friedman entre los tres modelos para ver si entre los tres existen diferencias.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Datos} & \textbf{P-value} \\ \hline
+		\textbf{Test}  & 0.06948          \\ \hline
+		\textbf{Train} & 3.843e-05        \\ \hline
+	\end{tabular}
+\end{table}
+
+Podemos ver que el p-valor en ambos casos es pequeño. En el caso de train vemos que claramente la diferencia es significativa. Esto es algo lógico pues si teníamos ya dicha diferencia significativa en train entre KNN y el modelo lineal esto se va a mantener en el Friedman.
+
+En el caso de test podemos ver que tenemos un valor ligeramente superior a $0.05$. Normalmente esta es la cota a partir de la cual decimos que se puede rechazar la hipótesis nula por lo que estamos en el umbral de poder decir que la diferencia entre los algoritmos es significativa. Habiendo analizado el comportamiento previo entre KNN y el modelo lineal y sabiendo que no existen diferencias entre ellos podemos deducir que esta diferencia la está marcando el algoritmo M5P.
+
+Para poder comprobar esto vamos a realizar el test post-hoc de Holm. Veamos los resultados en train y test.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Modelos} & \textbf{1} & \textbf{2} \\ \hline
+		\textbf{2}       & 0.0067     & -          \\ \hline
+		\textbf{3}       & 0.0039     & 0.0067     \\ \hline
+	\end{tabular}
+	\caption{Test post-hoc Holm en train}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Modelos} & \textbf{1} & \textbf{2} \\ \hline
+		\textbf{2}       & 0.97     & -          \\ \hline
+		\textbf{3}       & 0.27     & 0.27     \\ \hline
+	\end{tabular}
+	\caption{Test post-hoc Holm en test}
+\end{table}
+
+En este test ya podemos ver que en train la diferencia significativa es entre todos ellos, mientras que en test tenemos que los modelos KNN y regresión lineal no tienen diferencias significativas con un p-valor muy alto tenemos que con el modelo M5P tampoco existen dichas diferencias significativas pero con un pvalor menor.
+
+Por tanto podemos sacar dos conclusiones de todos estos tests. La primera de ellas es que no existe una diferencia significativa entre los mismos cuando los aplicamos al conjunto de test. La segunda es que es bastante probable que tengamos sobreajuste en los modelos ya que en train si que obtenemos que las diferencias son bastante significativas.
+
+\section{Clasificación: heart}
+
+Vamos ahora a estudiar el problema de clasificación. Ya hemos visto en el EDA el problema que tenemos con las variables ya que todas son categóricas y la mayoría binarias lo cual no nos da mucha información y podemos intuir que la clasificación no va a funcionar demasiado bien.
+
+\subsection{Algoritmo KNN}
+
+Vamos a probar en esta sección el uso del algoritmo KNN para el problema dado. A priori no sabemos cuál será la mejor configuración del valor de K, por lo que tendremos que hacer primero un estudio del mismo.
+
+Para evaluar el desempeño del modelo se ha seguido un esquema de validación cruzada con 10 folds. De todos los folds se obtiene un accuracy del modelo entrenando con el correspondiente porcentaje y prediciendo sobre el resto. Con esto al final obtenemos 10 porcentajes de acierto de los que podemos hacer la media. Para evaluar el mejor valor de K vamos a emplear esa media. Veamos los resultados para train y test:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/Clasificacion/knn1.png}
+	\caption{Porcentaje de acierto frente al valor de K para test.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{./Imagenes/Clasificacion/knn2.png}
+	\caption{Porcentaje de acierto frente al valor de K para train.}
+\end{figure}
+
+Podemos ver que en el caso de train el porcentaje de acierto disminuye a medida que aumentamos el valor de K, por lo que $K=3$ es el mejor de los valores para el train. Este comportamiento es lógico ya que a menor valor K más peso tendrá la instancia que posee la clase real que debe tener el dato. 
+
+En el caso de test podemos ver que se produce una cierta fluctuación de los aciertos. Debemos fijarnos y hacer notar que la oscilación no es demasiado grande, ya que el rango de valores es pequeño. En concreto para el test se obtiene el mejor rendimiento con $K=19$ donde se obtiene un rendimiento del $69.62963\%$. En el caso del train con $K=3$ el rendimiento que se obtuvo fue de un $82.22222\%$. 
+
+El rendimiento en train lo podemos usar para estudiar el sobreajuste del modelo para el valor de K elegido en el test. Como hemos dicho antes el mejor valor que se produce de acierto en el test se produce cuando K vale $19$. Con este valor de K obtiene el modelo en train un porcentaje de acierto de $73.16872\%$. Este valor no nos indica un sobreajuste puesto que el rendimiento del modelo no es excesivamente bueno.
+
+Podemos plantearnos la pregunta de por qué nuestro modelo no funciona bien para este conjunto de datos. Para poder responder a esta pregunta vamos a hacer uso de la técnica de reducción de dimensionalidad T-SNE que nos va a proporcionar una reducción de los datos a dos dimensiones, con lo que vamos a poder ver cómo de solapadas están ambas clases.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{./Imagenes/Clasificacion/tsne.png}
+	\caption{Reducción de dimensionalidad para visualización con T-SNE.}
+\end{figure}
+
+Debemos tener en cuenta que esta reducción de dimensionalidad no tiene por qué ser muy precisa en la visualización que nos está dando puesto que la mayoría de las variables son categóricas (y binarias) por lo que la información de la que disponemos no es especialmente buena.
+
+Aún así podemos ver que el problema parece ser que las clases están muy pegadas e incluso mezcladas. En las siguientes secciones detallaremos un poco más este punto pues podremos dar algo más de información con LDA y QDA.
+
+Para poder tener unos resultados consistentes que podamos comparar posteriormente con el resto de los modelos vamos a obtener el error en test y train con el valor de $K=19$.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Fold}          & \textbf{Train} & \textbf{Test} \\ \hline
+		\textbf{1}             & 72.83951       & 66.66667      \\ \hline
+		\textbf{2}             & 72.83951       & 70.37037      \\ \hline
+		\textbf{3}             & 74.89712       & 62.96296      \\ \hline
+		\textbf{4}             & 72.83951       & 77.77778      \\ \hline
+		\textbf{5}             & 70.37037       & 81.48148      \\ \hline
+		\textbf{6}             & 74.4856        & 70.37037      \\ \hline
+		\textbf{7}             & 73.66255       & 66.66667      \\ \hline
+		\textbf{8}             & 74.07407       & 59.25926      \\ \hline
+		\textbf{9}             & 72.83951       & 74.07407      \\ \hline
+		\textbf{10}            & 72.83951       & 66.66667      \\ \hline
+		\textbf{Acierto Medio} & 73.16872       & 69.62963      \\ \hline
+	\end{tabular}
+	\caption{Resultados para KNN.}
+\end{table}
+
+\subsection{Algoritmo LDA}
+
+Vamos a estudiar en esta sección el comportamiento del algoritmo LDA sobre el conjunto de datos que tenemos. Recordemos que el fundamento de LDA es trazar una recta que divida bien los datos, por lo que debemos tener en cuenta que si nuestro conjunto no es separable linealmente o si no tiene una frontera que pueda ser separada por una línea no obtendremos un resultado bueno.
+
+La metodología seguida es la misma que en el caso de KNN. Vamos a tener 10-FCV por lo que vamos a obtener 10 medidas de accuracy para el modelo tanto para train como para test.
+
+Veamos los resultados para train y test en media y por fold:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Fold}          & \textbf{Train} & \textbf{Test} \\ \hline
+		\textbf{1}             & 85.59671       & 85.18519      \\ \hline
+		\textbf{2}             & 86.41975       & 85.18519      \\ \hline
+		\textbf{3}             & 85.59671       & 85.18519      \\ \hline
+		\textbf{4}             & 86.00823       & 85.18519      \\ \hline
+		\textbf{5}             & 85.18519       & 85.18519      \\ \hline
+		\textbf{6}             & 84.77366       & 88.88889      \\ \hline
+		\textbf{7}             & 85.18519       & 96.2963       \\ \hline
+		\textbf{8}             & 86.41975       & 77.77778      \\ \hline
+		\textbf{9}             & 88.06584       & 62.96296      \\ \hline
+		\textbf{10}            & 84.36214       & 96.2963       \\ \hline
+		\textbf{Acierto Medio} & 85.76132       & 84.81481      \\ \hline
+	\end{tabular}
+	\caption{Tabla de resultados para LDA.}
+\end{table}
+
+Podemos ver que el resultado es mucho mejor que el obtenido por KNN en clasificación por lo que estamos ante un mejor modelo. No sólo supera al KNN en el resultado en media, sino en cada uno de los folds.
+
+Podemos ver que LDA obtiene un resultado mejor que KNN como hemos mencionado. Si queremos intentar intuir un poco las fronteras de ambas clases podemos pensar que están muy juntas. Esto puede provocar que KNN se confunda ya que cada punto va a tener cerca puntos de su clase y de la contraria, pero no implica que la frontera no sea separable como LDA nos está demostrando. 
+
+\subsection{Algoritmo QDA}
+
+Ahora vamos a probar el algoritmo QDA sobre nuestros datos. Con esta ejecución vamos a obtener algo más de información sobre las clases y su separación. Si obtenemos mejores resultados sabremos que la división de las clases no es puramente lineal y necesitamos de términos de mayor orden. Por contra si obtenemos los mismos o peores podremos deducir que la frontera está más definida a través del orden lineal.
+
+Veamos la tabla de resultados:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Fold}          & \textbf{Train} & \textbf{Test} \\ \hline
+		\textbf{1}             & 88.88889       & 77.77778      \\ \hline
+		\textbf{2}             & 86.41975       & 92.59259      \\ \hline
+		\textbf{3}             & 87.65432       & 85.18519      \\ \hline
+		\textbf{4}             & 87.2428       & 74.07407      \\ \hline
+		\textbf{5}             & 87.2428       & 85.18519      \\ \hline
+		\textbf{6}             & 87.65432       & 85.18519      \\ \hline
+		\textbf{7}             & 88.06584       & 88.88889       \\ \hline
+		\textbf{8}             & 87.2428       & 77.77778      \\ \hline
+		\textbf{9}             & 90.12346       & 66.66667      \\ \hline
+		\textbf{10}            & 87.2428       & 96.2963       \\ \hline
+		\textbf{Acierto Medio} & 87.77778       & 82.96296      \\ \hline
+	\end{tabular}
+	\caption{Tabla de resultados para QDA.}
+\end{table}
+
+Si comparamos el acierto medio en test de QDA y LDA podemos ver que LDA es ligeramente superior. Por contra QDA ajusta mejor en train. Esto nos puede estar indicando que este modelo sobreajusta, pues aunque es mejor en train que LDA luego no tiene mejor desempeño en test.
+
+Si hacemos el análisis por folds podemos ver que no está tan claro pues tenemos folds de LDA que tienen mejor acierto y folds de QDA que tienen mejor acierto, por tanto deberemos esperar hasta el test estadístico para ver si existen diferencias significativas. De momento en el acierto medio podemos ver que LDA es mejor para el test.
+
+Si hablamos de las fronteras del problema podemos ver que no  hemos mejorado, por lo que las fronteras no son cuadráticas y se ajustan más a un modelo lineal.
+
+\subsection{Comparativa de algoritmos}
+
+Para hacer esta comparativa vamos a emplear distintos datos. En primer lugar vamos a comparar el acierto medio de los modelos, así como el acierto por folds y su desviación típica.
+
+Para que sea una comparativa más detallada y estadísticamente fundamentada vamos a emplear los tests de Wilcoxon y post-hoc de Holm para estudiar si las diferencias entre algoritmos es significativa o no.
+
+Para empezar vamos a hacer el test de Wilcoxon por parejas entre todos los modelos. Se han hecho los tests entre KNN y LDA, KNN y QDA y LDA y QDA. Veamos las tablas:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Test}    & \textbf{KNN vs LDA} & \textbf{LDA vs QDA} & \textbf{KNN vs QDA} \\ \hline
+		\textbf{$R^+$}   & 0                   & 6.5                 & 0                   \\ \hline
+		\textbf{$R^-$}   & 55                  & 14.5                & 55                  \\ \hline
+		\textbf{p-value} & 0.00588927          & 0.461838            & 0.001853125         \\ \hline
+		\textbf{Train}   & \textbf{KNN vs LDA} & \textbf{LDA vs QDA} & \textbf{KNN vs QDA} \\ \hline
+		\textbf{$R^+$}   & 0                   & 45                  & 0                   \\ \hline
+		\textbf{$R^-$}   & 55                  & 0                   & 55                  \\ \hline
+		\textbf{p-value} & 0.001953125         & 0.009151689         & 0.00588927          \\ \hline
+	\end{tabular}
+	\caption{Tabla de tests de Wilcoxon.}
+\end{table}
+
+Este test se ha hecho empleando los datos de los 10 folds para poder tener unas medidas algo más completas que el hecho de comparar entre sí la media del acierto en los mismos.
+
+En la tabla podemos ver que hay dos partes: train y test. Si queremos estudiar el rendimiento de los modelos vamos a comparar los resultados en test y posteriormente veremos train para estudiar el sobreajuste.
+
+Podemos ver en test que no hay diferencias significativas entre LDA y QDA como hemos podido intuir de secciones anteriores. En cambio entre LDA y KNN y QDA y KNN hay diferencias significativas. Como hemos visto el rendimiento de KNN es sensiblemente menor que el que obtiene LDA y QDA y esto se ve reflejado en estos tests entre los resultados de los modelos.
+
+En el caso del train podemos ver que todos los algoritmos tienen diferencia significativas con el resto de los mismos. Es claro que LDA y QDA ajustan mejor en train que KNN pero estos resultados nos hacen pensar que este mejor ajuste no sólo se produce en test sino en train también a favor de LDA. Por tanto es posible que LDA o QDA sobreajusten.
+
+Vamos a ver ahora el test múltiple:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Train} & \textbf{1} & \textbf{2} \\ \hline
+		\textbf{2}     & 0.059      & -          \\ \hline
+		\textbf{3}     & 0.0118     & 0.0118     \\ \hline
+		\textbf{Test}  & \textbf{1} & \textbf{2} \\ \hline
+		\textbf{2}     & 0.0118     & -          \\ \hline
+		\textbf{3}     & 0.0059     & 0.3387     \\ \hline
+	\end{tabular}
+	\caption{Resultados del test post-hoc de Holm.}
+\end{table}
+
+El test post-hoc de Holm nos está dando la misma información que teníamos para test, esto es, todos los algoritmos son significativamente diferentes. En el caso de train tenemos un resultado que no se comparte con lo que teníamos previamente. Podemos ver que en train QDA es significativamente diferente de KNN y LDA pero KNN y LDA no lo son entre sí o no podemos afirmar nada de ellos pues su p-valor no es menor que $0.05$. Aún así la diferencia es muy pequeña y puede haberse producido por el error que acumula el test múltiple a medida que aumentamos el número de algoritmos a probar.
+
+Ya hemos comparado en las secciones previas el acierto medio de cada modelo. Otro estadístico interesante es la desviación típica del acierto entre folds. Los resultados son los siguientes:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Test}  & \textbf{Desviación Típica} \\ \hline
+		\textbf{KNN}   & 6.716776                   \\ \hline
+		\textbf{LDA}   & 9.474856                   \\ \hline
+		\textbf{QDA}   & 8.936771                   \\ \hline
+		\textbf{Train} & \textbf{Desviación Típica} \\ \hline
+		\textbf{KNN}   & 1.254225                   \\ \hline
+		\textbf{LDA}   & 1.048284                   \\ \hline
+		\textbf{QDA}   & 1.045588                   \\ \hline
+	\end{tabular}
+\caption{Desviaciones típicas en los aciertos de los modelos.}
+\end{table}
+
+Este dato nos proporciona información acerca de la robustez del ajuste del modelo, a menor desviación típica más consitente es el resultado y por tanto es algo bueno para el modelo. Como podemos comprobar en test el que menos oscila es el algoritmo KNN, seguido de QDA y después LDA. Esto nos puede estar hablando de un sobreajuste de LDA y QDA muy acusado que beneficia en el funcionamiento de algunos folds pero no en el caso general y por tanto en media superan a KNN.
+
+En el caso de train vemos que los resultados son muy parecidos entre sí y por tanto no tenemos mucha más información de la que no dispusiéramos con anterioridad.
+
+\section{Código}
+
+\subsection{EDA}
+
+\begin{lstlisting}[basicstyle=\tiny, language=R]
+###############################################################################################
+###############################################################################################
+##### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #####
+#####                                 DATASET REGRESION                                   #####
+##### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #####
+###############################################################################################
+###############################################################################################
+
+library(foreign)
+library(dplyr)
+dataset_regresion<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury.dat")
+dataset_regresion
+
+# Ahora vamos a ver el numero de variables y el tipo de cada una.
+cat("El numero de variables es: ", length(colnames(dataset_regresion)), "\n")
+cat("El tipo de las variables es:\n")
+for(i in 1:length(colnames(dataset_regresion))){
+cat("\t",colnames(dataset_regresion)[i], ": ", class(dataset_regresion[i][[1]]), "\n")
+}
+
+# Como podemos ver todas las variables son de tipo numerico
+# Ahora vamos a calcular una serie de estadisticos interesantes para cada variable.
+library(e1071)
+
+# Funcion para calcular la moda
+calculaModa <- function(v) {
+uniqv <- unique(v)
+uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# Funcion que nos da los estadisticos de una columna del dataset
+calculaEstadisticos<-function(col){
+estadisticos<-list(media=NA, mediana=NA, stdv=NA, moda=NA, curtosis=NA, asimetria=NA, minimo=NA, maximo=NA)
+estadisticos$media<-mean(col, na.rm=TRUE)
+estadisticos$mediana<-median(col, na.rm=TRUE)
+estadisticos$stdv<-sd(col, na.rm = TRUE)
+estadisticos$moda<-calculaModa(col)
+estadisticos$kurtosis<-kurtosis(col, na.rm=TRUE)
+estadisticos$asimetria<-skewness(col, na.rm=TRUE)
+estadisticos$minimo<-min(col, na.rm=TRUE)
+estadisticos$maximo<-max(col, na.rm=TRUE)
+return(estadisticos)
+}
+
+# Imprimimos bien formateados los estadisticos
+cat("\n\n\n", "Estadisticos de las columnas:\n")
+for(i in 1:length(colnames(dataset_regresion))){
+cat("\t", colnames(dataset_regresion)[i], ":", "\n")
+estadisticos<-calculaEstadisticos(dataset_regresion[,i])
+cat("\t\t", "Media: ", estadisticos$media, "\n")
+cat("\t\t", "Mediana: ", estadisticos$mediana, "\n")
+cat("\t\t", "Desviacion tipica: ", estadisticos$stdv, "\n")
+cat("\t\t", "Moda: ", estadisticos$moda, "\n")
+cat("\t\t", "Kurtosis: ", estadisticos$kurtosis, "\n")
+cat("\t\t", "Asimetria: ", estadisticos$asimetria, "\n")
+cat("\t\t", "Minimo: ", estadisticos$minimo, "\n")
+cat("\t\t", "Maximo: ", estadisticos$maximo, "\n")
+}
+
+#######################################################################
+##             Estudio de correlacion de las variables               ##
+#######################################################################
+
+# Funcion que obtiene las variables cuya correlacion supere threshold
+obtainCorrelated<-function(varIndex, dataset, threshold=0.9){
+combinations<-combn(varIndex,2)
+
+correlations<-vector("numeric", dim(combinations)[2])
+
+for(i in 1:dim(combinations)[2]){
+pair<-combinations[,i]
+correlations[i]<-cor(dataset[,pair[1]], dataset[,pair[2]], method = c("pearson", "kendall", "spearman"))
+}
+
+for(i in 1:length(correlations)){
+if(abs(correlations[i])>threshold){
+cat("La pareja de variables: ", combinations[,i][1], ", ", combinations[,i][2], " tiene una correlacion: ", correlations[i], "\n")
+}
+}
+}
+
+obtainCorrelated(1:(length(dataset_regresion)-1), dataset_regresion)
+
+# Vemos que la variable 2 esta altamente correlada con el resto, la quitamos y repetimos
+obtainCorrelated(c(1,3:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La variable 9 podemos quitarla tambien
+obtainCorrelated(c(1,3:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 4 podemos quitarla tambien
+obtainCorrelated(c(1,3,5:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 3 podemos quitarla tambien
+obtainCorrelated(c(1,5:8,10:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 12 podemos quitarla
+obtainCorrelated(c(1,5:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 5 podemos quitarla
+obtainCorrelated(c(1,6:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 6 la podemos quitar
+obtainCorrelated(c(1,7:8,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# La 8 podemos quitarla
+obtainCorrelated(c(1,7,10:11,13:(length(dataset_regresion)-1)), dataset_regresion)
+
+# Finalmente nos hemos quedado con las caracteristicas 1,7,10,11,13,14,15
+obtainCorrelated(c(1,7,10:11,13:(length(dataset_regresion)-1)), dataset_regresion, -1)
+# Ahora merece la pena que veamos la correlacion de las variables con la de salida
+
+
+# Funcion que obtiene la correlacion de las variables con las de salida
+corrSalida<-function(var,dataset){
+for(v in var){
+correlation<-cor(dataset[,v], dataset[,length(dataset)], method=c("pearson", "kendall", "spearman"))
+cat("La correlacion de la variable ", v, " con la salida es de: ", correlation, "\n")
+}
+}
+
+var<-c(1,7,10,11,13,14,15)
+corrSalida(var, dataset_regresion)
+
+# Viendo la salida parece logico que quitemos la variable 1 porque tiene una correlacion baja
+var<-c(7,10,11,13,14,15)
+corrSalida(var, dataset_regresion)
+
+#######################################################################
+##                Valores perdidos (Missing values)                  ##
+#######################################################################
+
+# Vamos a ver si tenemos valores perdidos
+which(is.na(dataset_regresion))
+
+# No tenemos valores perdidos
+
+#######################################################################
+##                           Outliers                                ##
+#######################################################################
+
+# Pairplot
+pairs(dataset_regresion, pch=16, col="deepskyblue")
+
+var<-c(7,10,11,13,14,15)
+pairs(dataset_regresion[,c(var,16)], pch=16, col="deepskyblue")
+
+boxplot(dataset_regresion)
+boxplot(dataset_regresion[,c(-8,-9,-10,-14,-12,-15,-13)])
+boxplot(dataset_regresion[,c(-1,-8,-9,-10,-12,-15,-13,-14)])
+boxplot(dataset_regresion[,var])
+boxplot(dataset_regresion[,var][,c(1,3)])
+plot(dataset_regresion$bankCredit)
+
+#######################################################################
+##                Distribucion de las variables                      ##
+#######################################################################
+library(plyr)
+library(psych)
+multi.hist(dataset_regresion)
+
+# Test de normalidad para una variable
+normalityTest<-function(dataset, var=-1){
+if(var==-1){
+for(i in 1:length(dataset)){
+cat("Test de normalidad para la variable ", i, "\n")
+pvalue<-wilcox.test(dataset[,i])$p.value
+cat("P-valor: ", pvalue, "\n")
+if(pvalue<0.05){
+cat("Como es menor a 0.05 se rechaza la hipotesis nula, no sigue una normal.")
+}
+else{
+cat("Como es mayor a 0.05 no podemos rechazar la hipotesis nula y por tanto no podemos afirmar nada.")
+}
+cat("\n\n")
+}
+}
+else{
+for(i in var){
+cat("Test de normalidad para la variable ", i, "\n")
+pvalue<-wilcox.test(dataset[,i])$p.value
+cat("P-valor: ", pvalue, "\n")
+if(pvalue<0.05){
+cat("Como es menor a 0.05 se rechaza la hipotesis nula, no sigue una normal.")
+}
+else{
+cat("Como es mayor a 0.05 no podemos rechazar la hipotesis nula y por tanto no podemos afirmar nada.")
+}
+cat("\n\n")
+}
+}
+}
+
+normalityTest(dataset_regresion)
+
+
+###############################################################################################
+###############################################################################################
+##### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #####
+#####                               DATASET CLASIFICACION                                 #####
+##### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  #####
+###############################################################################################
+###############################################################################################
+
+dataset_clasificacion<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart.dat", header=FALSE, comment.char = "@")
+colnames(dataset_clasificacion)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+dataset_clasificacion
+
+# Ahora vamos a ver el numero de variables y el tipo de cada una.
+cat("El numero de variables es: ", length(colnames(dataset_clasificacion)), "\n")
+cat("El tipo de las variables es:\n")
+for(i in 1:length(colnames(dataset_clasificacion))){
+cat("\t",colnames(dataset_clasificacion)[i], ": ", class(dataset_clasificacion[i][[1]]), "\n")
+}
+
+# Ahora vamos a calcular los estadisticos de las variables
+
+cat("\n\n\n", "Estadisticos de las columnas:\n")
+for(i in 1:length(colnames(dataset_clasificacion))){
+cat("\t", colnames(dataset_clasificacion)[i], ":", "\n")
+estadisticos<-calculaEstadisticos(dataset_clasificacion[,i])
+cat("\t\t", "Media: ", estadisticos$media, "\n")
+cat("\t\t", "Mediana: ", estadisticos$mediana, "\n")
+cat("\t\t", "Desviacion tipica: ", estadisticos$stdv, "\n")
+cat("\t\t", "Moda: ", estadisticos$moda, "\n")
+cat("\t\t", "Kurtosis: ", estadisticos$kurtosis, "\n")
+cat("\t\t", "Asimetria: ", estadisticos$asimetria, "\n")
+cat("\t\t", "Minimo: ", estadisticos$minimo, "\n")
+cat("\t\t", "Maximo: ", estadisticos$maximo, "\n")
+}
+
+#######################################################################
+##             Estudio de correlacion de las variables               ##
+#######################################################################
+
+obtainCorrelated(1:(length(dataset_clasificacion)-1), dataset_clasificacion, threshold = -1)
+
+# Viendo la salida parece logico que quitemos la variable 1 porque tiene una correlacion baja
+corrSalida(1:(length(dataset_clasificacion)-1), dataset_clasificacion)
+
+#######################################################################
+##                Valores perdidos (Missing values)                  ##
+#######################################################################
+
+# Vamos a ver si tenemos valores perdidos
+which(is.na(dataset_clasificacion))
+
+# No tenemos valores perdidos
+
+#######################################################################
+##                           Outliers                                ##
+#######################################################################
+
+pairs(dataset_clasificacion, pch=16, col="deepskyblue")
+
+# Vamos a quitar las variables que no son muy interesantes
+var<-c(-2,-3,-6,-7,-9,-11,-12,-13)
+pairs(dataset_clasificacion[,var], pch=16, col="deepskyblue")
+pairs(dataset_clasificacion[,c(-var, length(dataset_clasificacion))], pch=16, col="deepskyblue")
+
+boxplot(dataset_clasificacion)
+boxplot(dataset_clasificacion[,c(-1,-4,-5,-6,-8,-10)])
+
+boxplot(dataset_clasificacion[,1]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,2]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,3]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,4]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,5]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,6]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,7]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,8]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,9]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,10]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,11]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,12]~dataset_clasificacion[,14], data=dataset_clasificacion)
+boxplot(dataset_clasificacion[,13]~dataset_clasificacion[,14], data=dataset_clasificacion)
+
+
+#######################################################################
+##                Distribucion de las variables                      ##
+#######################################################################
+library(plyr)
+library(psych)
+multi.hist(dataset_clasificacion)
+
+normalityTest(dataset_clasificacion)
+
+
+\end{lstlisting}
+
+\subsection{Regresión}
+
+\begin{lstlisting}[basicstyle=\tiny, language=R]
+
+library(foreign)
+library(dplyr)
+dataset_regresion<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury.dat")
+dataset_regresion
+
+colnames(dataset_regresion)
+attach(dataset_regresion)
+
+###########################################################################
+##                            Apartado 1                                 ##
+###########################################################################
+
+# Vamos a hacer un modelo por variable
+modelo.1Y_CMaturiyRate<-lm(`1MonthCDRate`~`1Y-CMaturityRate`)
+modelo.30Y_CMortgageRate<-lm(`1MonthCDRate`~`30Y-CMortgageRate`)
+modelo.3M_Rate_AuctionAverage<-lm(`1MonthCDRate`~`3M-Rate-AuctionAverage`)
+modelo.3M_Rate_SecondaryMarket<-lm(`1MonthCDRate`~`3M-Rate-SecondaryMarket`)
+modelo.3Y_CMaturityRate<-lm(`1MonthCDRate`~`3Y-CMaturityRate`)
+modelo.5Y_CMaturityRate<-lm(`1MonthCDRate`~`5Y-CMaturityRate`)
+modelo.bankCredit<-lm(`1MonthCDRate`~bankCredit)
+modelo.currency<-lm(`1MonthCDRate`~currency)
+modelo.demandDeposits<-lm(`1MonthCDRate`~demandDeposits)
+modelo.federalFunds<-lm(`1MonthCDRate`~federalFunds)
+modelo.moneyStock<-lm(`1MonthCDRate`~moneyStock)
+modelo.checkableDeposits<-lm(`1MonthCDRate`~checkableDeposits)
+modelo.loansLeases<-lm(`1MonthCDRate`~loansLeases)
+modelo.savingsDeposits<-lm(`1MonthCDRate`~savingsDeposits)
+modelo.tradeCurrencies<-lm(`1MonthCDRate`~tradeCurrencies)
+
+# Pintamos y hacemos summary de cada modelo
+
+# Modelo 1 0.2024 de R2 ajustado
+plot(`1MonthCDRate`~`1Y-CMaturityRate`, dataset_regresion)
+abline(modelo.1Y_CMaturiyRate, col="red")
+summary(modelo.1Y_CMaturiyRate)
+
+# Modelo 2 0.9551 de R2 ajustado
+plot(`1MonthCDRate`~`30Y-CMortgageRate`, dataset_regresion)
+abline(modelo.30Y_CMortgageRate, col="red")
+summary(modelo.30Y_CMortgageRate)
+
+# Modelo 3 0.7863 de R2 ajustado
+plot(`1MonthCDRate`~`3M-Rate-AuctionAverage`, dataset_regresion)
+abline(modelo.3M_Rate_AuctionAverage, col="red")
+summary(modelo.3M_Rate_AuctionAverage)
+
+# Modelo 4 0.9807 de R2 ajustado
+plot(`1MonthCDRate`~`3M-Rate-SecondaryMarket`, dataset_regresion)
+abline(modelo.3M_Rate_SecondaryMarket, col="red")
+summary(modelo.3M_Rate_SecondaryMarket)
+
+# Modelo 5 0.9835 de R2 ajustado
+plot(`1MonthCDRate`~`3Y-CMaturityRate`, dataset_regresion)
+abline(modelo.3Y_CMaturityRate, col="red")
+summary(modelo.3Y_CMaturityRate)
+
+# Modelo 6 0.8794 de R2 ajustado
+plot(`1MonthCDRate`~`5Y-CMaturityRate`, dataset_regresion)
+abline(modelo.5Y_CMaturityRate, col="red")
+summary(modelo.5Y_CMaturityRate)
+
+# Modelo 7 0.8291 de R2 ajustado
+plot(`1MonthCDRate`~bankCredit, dataset_regresion)
+abline(modelo.bankCredit, col="red")
+summary(modelo.bankCredit)
+
+# Modelo 8 0.4994 de R2 ajustado
+plot(`1MonthCDRate`~currency, dataset_regresion)
+abline(modelo.currency, col="red")
+summary(modelo.currency)
+
+# Modelo 9 0.4597 de R2 ajustado
+plot(`1MonthCDRate`~demandDeposits, dataset_regresion)
+abline(modelo.demandDeposits, col="red")
+summary(modelo.demandDeposits)
+
+# Modelo 10 0.4926 de R2 ajustado
+plot(`1MonthCDRate`~federalFunds, dataset_regresion)
+abline(modelo.federalFunds, col="red")
+summary(modelo.federalFunds)
+
+# Modelo 11 0.9893 de R2 ajustado
+plot(`1MonthCDRate`~moneyStock, dataset_regresion)
+abline(modelo.moneyStock, col="red")
+summary(modelo.moneyStock)
+
+# Modelo 12 0.6537 de R2 ajustado
+plot(`1MonthCDRate`~checkableDeposits, dataset_regresion)
+abline(modelo.checkableDeposits, col="red")
+summary(modelo.checkableDeposits)
+
+# Modelo 13 0.6854 de R2 ajustado
+plot(`1MonthCDRate`~loansLeases, dataset_regresion)
+abline(modelo.loansLeases, col="red")
+summary(modelo.loansLeases)
+
+# Modelo 14 0.4811 de R2 ajustado
+plot(`1MonthCDRate`~savingsDeposits, dataset_regresion)
+abline(modelo.savingsDeposits, col="red")
+summary(modelo.savingsDeposits)
+
+# Modelo 15 0.6287 de R2 ajustado
+plot(`1MonthCDRate`~tradeCurrencies, dataset_regresion)
+abline(modelo.tradeCurrencies, col="red")
+summary(modelo.tradeCurrencies)
+
+# Tabla de R2 ajustado
+# Modelo1: 0.2024
+# Modelo2: 0.9551
+# Modelo3: 0.7863
+# Modelo4: 0.9807
+# Modelo5: 0.9835
+# Modelo6: 0.8794
+# Modelo7: 0.8291
+# Modelo8: 0.4994
+# Modelo9: 0.4597
+# Modelo10: 0.4926
+# Modelo11: 0.9893 ~
+# Modelo12: 0.6537
+# Modelo13: 0.6854
+# Modelo14: 0.4811
+# Modelo15: 0.6287
+
+# Nos quedamos con los 5 mejores modelos.
+modelo.moneyStock
+modelo.3Y_CMaturityRate
+modelo.3M_Rate_SecondaryMarket
+modelo.30Y_CMortgageRate
+modelo.5Y_CMaturityRate
+
+###########################################################################
+##                            Apartado 2                                 ##
+###########################################################################
+
+modelo1<-lm(`1MonthCDRate`~., dataset_regresion)
+summary(modelo1)
+
+# Quitamos federalFunds
+
+modelo2<-lm(`1MonthCDRate`~.-federalFunds, dataset_regresion)
+summary(modelo2)
+
+# Quitamos 3M-Rate-AuctionAverage
+modelo3<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`, dataset_regresion)
+summary(modelo3)
+
+# Quitamos 3M-Rate-SecondaryMarket
+modelo4<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`, dataset_regresion)
+summary(modelo4)
+
+# Quitamos 5Y-CMaturiryRate
+modelo5<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`, dataset_regresion)
+summary(modelo5)
+
+# Vamos a probar a quitar demandDeposits
+modelo6<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits, dataset_regresion)
+summary(modelo6)
+
+# Vamos a probar a quitar bankCredit
+modelo7<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit, dataset_regresion)
+summary(modelo7)
+
+# Vamos a probar a quitar savingsDeposits
+modelo8<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits, dataset_regresion)
+summary(modelo8)
+
+# Vamos a probar a quitar currency
+modelo9<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency, dataset_regresion)
+summary(modelo9)
+
+# Vamos a probar a quitar loansLeases
+modelo10<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases, dataset_regresion)
+summary(modelo10)
+
+# Vamos a probar a quitar checkableDeposits
+modelo11<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits, dataset_regresion)
+summary(modelo11)
+
+# Vamos a probar a quitar 30Y-CMortgageRate
+modelo12<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits-`30Y-CMortgageRate`, dataset_regresion)
+summary(modelo12)
+
+# Vamos a probar a quitar 1Y-CMaturityRate
+modelo13<-lm(`1MonthCDRate`~.-federalFunds-`3M-Rate-AuctionAverage`-`3M-Rate-SecondaryMarket`-`5Y-CMaturityRate`-demandDeposits-bankCredit-savingsDeposits-currency-loansLeases-checkableDeposits-`30Y-CMortgageRate`-`1Y-CMaturityRate`, dataset_regresion)
+summary(modelo13)
+
+# Vamos a comprobar que resultados obtiene el modelo con las variables que decidimos quedarnos en el EDA
+var<-c(7,10,11,13,14,15)
+names(dataset_regresion)[var]
+modelo14<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3M-Rate-SecondaryMarket`+`3Y-CMaturityRate`+currency+federalFunds+savingsDeposits+tradeCurrencies, dataset_regresion)
+summary(modelo14)
+
+# Quitamos las que tienen poca significancia
+modelo15<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3M-Rate-SecondaryMarket`+`3Y-CMaturityRate`+currency+savingsDeposits, dataset_regresion)
+summary(modelo15)
+
+# Si quisieramos un modelo mas simple podemos quitar 3M-Rate-SecondaryMarket
+modelo16<-lm(`1MonthCDRate`~`1Y-CMaturityRate`+`3Y-CMaturityRate`+currency+savingsDeposits, dataset_regresion)
+summary(modelo16)
+
+# Finalmente nos hemos quedado con 4.
+# El modelo6 es el mejor y el modelo 9 es mas simple con resultados muy parecidos. Merece la pena el ultimo.
+
+# Vamos a probar una dependencia cuadratica sobre estas variables aunque el resultado ya es lo suficientemente bueno.
+modelo17<-lm(`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies+`3Y-CMaturityRate`*`3Y-CMaturityRate`+moneyStock*moneyStock+tradeCurrencies*tradeCurrencies+`3Y-CMaturityRate`*moneyStock+`3Y-CMaturityRate`*tradeCurrencies+moneyStock*tradeCurrencies, dataset_regresion)
+summary(modelo17)
+# No hay ninguna mejora
+
+###########################################################################
+##                            Apartado 3                                 ##
+###########################################################################
+
+# Funcion para leer los folds
+readFolds<-function(){
+fold1.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tra.dat")
+fold1.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tst.dat")
+
+fold2.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-2tra.dat")
+fold2.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-2tst.dat")
+
+fold3.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-3tra.dat")
+fold3.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-3tst.dat")
+
+fold4.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-4tra.dat")
+fold4.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-4tst.dat")
+
+fold5.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-5tra.dat")
+fold5.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-5tst.dat")
+
+folds<-list(fold1=list(train=fold1.train, test=fold1.test),
+fold2=list(train=fold2.train, test=fold2.test),
+fold3=list(train=fold3.train, test=fold3.test),
+fold4=list(train=fold4.train, test=fold4.test),
+fold5=list(train=fold5.train, test=fold5.test))
+
+return(folds)
+}
+
+folds<-readFolds()
+
+library(kknn)
+
+# Funcion que ejecuta knn sobre test o train con el valor de k introducido y la formula pasada
+ejecutaKNN<-function(formula, folds, k, tt="test"){
+errores<-vector(mode = "numeric", length = 5)
+for(i in 1:5){
+if(tt=="test"){
+modelo.knn<-kknn(formula, folds[[i]]$train, folds[[i]]$test, k=k)
+yprime=modelo.knn$fitted.values
+errores[i]<-sum(abs(folds[[i]]$test$`1MonthCDRate`-yprime)^2)/length(yprime)
+}
+else{
+modelo.knn<-kknn(formula, folds[[i]]$train, folds[[i]]$train, k=k)
+yprime=modelo.knn$fitted.values
+errores[i]<-sum(abs(folds[[i]]$train$`1MonthCDRate`-yprime)^2)/length(yprime)
+}
+}
+return(list(errores=errores, media.errores=mean(errores)))
+}
+
+# Todas las  variables con k desde 3 hasta 55 a saltos de 2
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Grafica de errores por valor de K para test")
+resultados[,2]
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~., folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Grafica de errores por valor de K para train")
+resultados[,1]
+
+# Ahora vamos a probar con las variables del mejor modelo de una variable
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Grafica de errores por valor de K para test")
+resultados[,10]
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~moneyStock, folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Grafica de errores por valor de K para train")
+resultados[,1]
+
+# Ahora vamos a probar con el mejor modelo lineal de 3 variables
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="test")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en test", main = "Grafica de errores por valor de K para test")
+resultados[,4]
+
+resultados<-sapply(seq(3,55,2), ejecutaKNN, formula=`1MonthCDRate`~`3Y-CMaturityRate`+moneyStock+tradeCurrencies, folds=folds, tt="train")
+plot(seq(3,55,2), resultados[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Error en train", main = "Grafica de errores por valor de K para train")
+resultados[,1]
+
+###########################################################################
+##                            Apartado 4                                 ##
+###########################################################################
+
+# Funcion que ejecuta LM y obtiene los errores
+ejecutaLM<-function(formula, folds, tt="test"){
+errores<-vector(mode = "numeric", length = 5)
+for(i in 1:5){
+if(tt=="test"){
+modelo<-lm(formula, folds[[i]]$train)
+yprime=predict(modelo,folds[[i]]$test)
+errores[i]<-sum(abs(folds[[i]]$test$`1MonthCDRate`-yprime)^2)/length(yprime)
+}
+else{
+modelo<-lm(formula, folds[[i]]$train)
+yprime=predict(modelo,folds[[i]]$train)
+errores[i]<-sum(abs(folds[[i]]$train$`1MonthCDRate`-yprime)^2)/length(yprime)
+}
+}
+return(list(errores=errores, media.errores=mean(errores)))
+}
+
+ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="test")
+ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="train")
+
+ejecutaKNN(formula = `1MonthCDRate`~. ,folds = folds, k=5, tt="test")
+ejecutaKNN(formula = `1MonthCDRate`~. ,folds = folds, k=5, tt="train")
+
+ejecutaLM(`1MonthCDRate`~., folds, tt="test")
+ejecutaLM(`1MonthCDRate`~., folds, tt="train")
+
+# Leemos los resultados de test
+resultadostst <- read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_test_alumnos.csv")
+tablatst <- cbind(resultadostst[,2:dim(resultadostst)[2]])
+colnames(tablatst) <- names(resultadostst)[2:dim(resultadostst)[2]]
+rownames(tablatst) <- resultadostst[,1]
+
+# Leemos los resultados de train
+resultadostra <- read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_train_alumnos.csv")
+tablatra <- cbind(resultadostra[,2:dim(resultadostra)[2]])
+colnames(tablatra) <- names(resultadostra)[2:dim(resultadostra)[2]]
+rownames(tablatra) <- resultadostra[,1]
+
+# Calculamos las diferencias para test
+difs <- (tablatst[,1] - tablatst[,2]) / tablatst[,1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatst)[1], colnames(tablatst)[2])
+head(wilc_1_2)
+
+# Hacemos el test
+LMvsKNNtst <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas <- LMvsKNNtst$statistic
+pvalue <- LMvsKNNtst$p.value
+LMvsKNNtst <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos <- LMvsKNNtst$statistic
+Rmas
+Rmenos
+pvalue
+
+# Calculamos las diferencias para train
+difs <- (tablatra[,1] - tablatra[,2]) / tablatra[,1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatra)[1], colnames(tablatra)[2])
+head(wilc_1_2)
+
+# Hacemos el test
+LMvsKNNtra <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas <- LMvsKNNtra$statistic
+pvalue <- LMvsKNNtra$p.value
+LMvsKNNtra <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos <- LMvsKNNtra$statistic
+Rmas
+Rmenos
+pvalue
+
+# Test de friedman
+friedman.test(as.matrix(tablatra))
+friedman.test(as.matrix(tablatst))
+
+# Test post-hoc Holm
+tam <-dim(tablatra)
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(tablatra), groups, p.adjust= "holm", paired = T)
+
+tam <-dim(tablatst)
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(tablatst), groups, p.adjust= "holm", paired = T)
+
+\end{lstlisting}
+
+\subsection{Clasificación}
+
+\begin{lstlisting}[basicstyle=\tiny, language=R]
+
+library(foreign)
+library(dplyr)
+dataset_clasificacion<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart.dat", header=FALSE, comment.char = "@")
+colnames(dataset_clasificacion)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+dataset_clasificacion
+
+colnames(dataset_clasificacion)
+attach(dataset_clasificacion)
+
+library(caret)
+library(class)
+
+library(MASS)
+library(ISLR)
+
+###########################################################################
+##                            Apartado 1                                 ##
+###########################################################################
+
+# Leemos los folds
+readFolds<-function(){
+fold1.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-1tra.dat", header=FALSE, comment.char = "@")
+fold1.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-1tst.dat", header=FALSE, comment.char = "@")
+colnames(fold1.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold1.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold2.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-2tra.dat", header=FALSE, comment.char = "@")
+fold2.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-2tst.dat", header=FALSE, comment.char = "@")
+colnames(fold2.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold2.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold3.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-3tra.dat", header=FALSE, comment.char = "@")
+fold3.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-3tst.dat", header=FALSE, comment.char = "@")
+colnames(fold3.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold3.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold4.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-4tra.dat", header=FALSE, comment.char = "@")
+fold4.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-4tst.dat", header=FALSE, comment.char = "@")
+colnames(fold4.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold4.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold5.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-5tra.dat", header=FALSE, comment.char = "@")
+fold5.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-5tst.dat", header=FALSE, comment.char = "@")
+colnames(fold5.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold5.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold6.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-6tra.dat", header=FALSE, comment.char = "@")
+fold6.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-6tst.dat", header=FALSE, comment.char = "@")
+colnames(fold6.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold6.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold7.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-7tra.dat", header=FALSE, comment.char = "@")
+fold7.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-7tst.dat", header=FALSE, comment.char = "@")
+colnames(fold7.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold7.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold8.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-8tra.dat", header=FALSE, comment.char = "@")
+fold8.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-8tst.dat", header=FALSE, comment.char = "@")
+colnames(fold8.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold8.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold9.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-9tra.dat", header=FALSE, comment.char = "@")
+fold9.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-9tst.dat", header=FALSE, comment.char = "@")
+colnames(fold9.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold9.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+fold10.train<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-10tra.dat", header=FALSE, comment.char = "@")
+fold10.test<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Clasificacion/heart/heart-10-10tst.dat", header=FALSE, comment.char = "@")
+colnames(fold10.train)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+colnames(fold10.test)<-c("Age", "Sex", "ChestPainType", "RestBloodPressure", "SerumCholestoral", "FastingBloodSugar", "ResElectrocardiographic", "MaxHeartRate", "ExerciseInduced", "Oldpeak", "Slope", "MajorVessels", "Thal", "Class")
+
+folds<-list(fold1=list(train=fold1.train, test=fold1.test),
+fold2=list(train=fold2.train, test=fold2.test),
+fold3=list(train=fold3.train, test=fold3.test),
+fold4=list(train=fold4.train, test=fold4.test),
+fold5=list(train=fold5.train, test=fold5.test),
+fold6=list(train=fold6.train, test=fold6.test),
+fold7=list(train=fold7.train, test=fold7.test),
+fold8=list(train=fold8.train, test=fold8.test),
+fold9=list(train=fold9.train, test=fold9.test),
+fold10=list(train=fold10.train, test=fold10.test))
+
+return(folds)
+}
+
+folds<-readFolds()
+
+# Funcion que ejecuta KNN sobre test o train con el valor de k introducido
+ejecutaKNN<-function(k, type="test"){
+cat("Valor de k: ", k, ", tipo: ", type)
+acc<-0
+aciertos<-vector(mode="numeric", length = 10)
+for(i in 1:10){
+test<-folds[[i]]$test
+train<-folds[[i]]$train
+if(type=="test"){
+pred <- knn(train = train[,-length(train)], test = test[,-length(test)], cl = train[,length(train)], k=k)
+
+cat("\nFold ", i, ": ", mean(pred==test[,length(test)])*100, "%")
+aciertos[i]<-mean(pred==test[,length(test)])*100
+acc<-acc+mean(pred==test[,length(test)])*100
+#print(table(pred,test[,length(test)]))
+}
+else{
+pred <- knn(train = train[,-length(train)], test = train[,-length(train)], cl = train[,length(train)], k=k)
+
+cat("\nFold ", i, ": ", mean(pred==train[,length(train)])*100, "%")
+aciertos[i]<-mean(pred==train[,length(train)])*100
+acc<-acc+mean(pred==train[,length(train)])*100
+#print(table(pred,test[,length(test)]))
+}
+}
+acc<-acc/10
+cat("\nAccuracy medio: ", acc)
+return(list(aciertos=aciertos, acierto.medio=acc, desviacion=sd(aciertos)))
+}
+
+aciertos.knn.test<-sapply(seq(3,55,2), ejecutaKNN, type="test")
+plot(seq(3,55,2), aciertos.knn.test[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Porcentaje de acierto", main = "Acierto vs K para test")
+aciertos.knn.test[,9]
+
+aciertos.knn.train<-sapply(seq(3,55,2), ejecutaKNN, type="train")
+plot(seq(3,55,2), aciertos.knn.train[2,], type="b", col="blue", lwd=7, xlab="Valores de K", ylab="Porcentaje de acierto", main = "Acierto vs K para train")
+aciertos.knn.train[,1]
+aciertos.knn.train[,9]
+
+# Utilizamos TSNE para reducir los datos y pintarlos por clases
+library(Rtsne)
+reduced<-data.frame(Rtsne(dataset_clasificacion[,-1], dims=2))
+
+p1 <- ggplot(as.data.frame(reduced$Y), aes(x=V1, y=V2)) + geom_point(aes(col=factor(dataset_clasificacion$Class))) + theme(axis.title.y = element_blank())
+p1
+
+ejecutaKNN(k=19, type="test")
+ejecutaKNN(k=19, type="train")
+
+###########################################################################
+##                            Apartado 2                                 ##
+###########################################################################
+
+# Vamos a comprobar si nuestras variables cumplen la precondicion de que son normales
+# Sabemos ya por el EDA que no
+
+# Todas las variables.
+
+# Prediciendo sobre el test
+mean_score<-0
+aciertos.lda.test<-vector(mode = "numeric", length = 10)
+for(i in 1:10){
+test<-folds[[i]]$test
+train<-folds[[i]]$train
+model<-lda(Class~.,data=train)
+
+lda.pred <- predict(model,test)
+cat("\nFold ", i, ":")
+print(table(lda.pred$class,test$Class))
+print(mean(lda.pred$class==test$Class))
+aciertos.lda.test[i]<-mean(lda.pred$class==test$Class)
+mean_score<-mean_score+mean(lda.pred$class==test$Class)
+}
+mean_score<-mean_score/10
+cat("\nDesviacion tipica: ", sd(aciertos.lda.test)*100)
+cat("\nScore final: ", mean_score)
+
+# Prediciendo sobre el train
+mean_score<-0
+aciertos.lda.train<-vector(mode="numeric", length = 10)
+for(i in 1:10){
+test<-folds[[i]]$test
+train<-folds[[i]]$train
+model<-lda(Class~.,data=train)
+
+lda.pred <- predict(model,train)
+cat("\nFold ", i, ":")
+print(table(lda.pred$class,train$Class))
+print(mean(lda.pred$class==train$Class))
+aciertos.lda.train[i]<-mean(lda.pred$class==train$Class)
+mean_score<-mean_score+mean(lda.pred$class==train$Class)
+}
+mean_score<-mean_score/10
+cat("\nDesviacion tipica: ", sd(aciertos.lda.train)*100)
+cat("\nScore final: ", mean_score)
+
+###########################################################################
+##                            Apartado 3                                 ##
+###########################################################################
+
+# Prediciendo sobre el test
+mean_score<-0
+aciertos.qda.test<-vector(mode="numeric", length = 10)
+for(i in 1:10){
+test<-folds[[i]]$test
+train<-folds[[i]]$train
+model<-qda(Class~.,data=train)
+
+lda.pred <- predict(model,test)
+cat("\nFold ", i, ":")
+print(table(lda.pred$class,test$Class))
+print(mean(lda.pred$class==test$Class))
+aciertos.qda.test[i]<-mean(lda.pred$class==test$Class)
+mean_score<-mean_score+mean(lda.pred$class==test$Class)
+}
+mean_score<-mean_score/10
+cat("\nDesviacion tipica: ", sd(aciertos.qda.test)*100)
+cat("\nScore final: ", mean_score)
+
+# Prediciendo sobre el train
+mean_score<-0
+aciertos.qda.train<-vector(mode="numeric", length = 10)
+for(i in 1:10){
+test<-folds[[i]]$test
+train<-folds[[i]]$train
+model<-qda(Class~.,data=train)
+
+lda.pred <- predict(model,train)
+cat("\nFold ", i, ":")
+print(table(lda.pred$class,train$Class))
+print(mean(lda.pred$class==train$Class))
+aciertos.qda.train[i]<-mean(lda.pred$class==train$Class)
+mean_score<-mean_score+mean(lda.pred$class==train$Class)
+}
+mean_score<-mean_score/10
+cat("\nDesviacion tipica: ", sd(aciertos.qda.train)*100)
+cat("\nScore final: ", mean_score)
+
+###########################################################################
+##                            Apartado 4                                 ##
+###########################################################################
+
+computeWilcoxon<-function(model1, model2){
+# Leemos los resultados de test
+resultadostst <- data.frame(list(knn=aciertos.knn.test[,9]$aciertos, lda=aciertos.lda.test, qda=aciertos.qda.test))
+tablatst <- cbind(resultadostst[,1:dim(resultadostst)[2]])
+colnames(tablatst) <- names(resultadostst)[1:dim(resultadostst)[2]]
+
+# Leemos los resultados de train
+resultadostra <- data.frame(list(knn=aciertos.knn.train[,9]$aciertos, lda=aciertos.lda.train, qda=aciertos.qda.train))
+tablatra <- cbind(resultadostra[,1:dim(resultadostra)[2]])
+colnames(tablatra) <- names(resultadostra)[1:dim(resultadostra)[2]]
+
+# Calculamos las diferencias para test
+difs <- (tablatst[,model1] - tablatst[,model2]) / tablatst[,model1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatst)[model1], colnames(tablatst)[model2])
+head(wilc_1_2)
+
+# Hacemos el test
+LMvsKNNtst <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas.test <- LMvsKNNtst$statistic
+pvalue.test <- LMvsKNNtst$p.value
+LMvsKNNtst <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos.test <- LMvsKNNtst$statistic
+
+# Calculamos las diferencias para train
+difs <- (tablatra[,model1] - tablatra[,model2]) / tablatra[,model1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatra)[model1], colnames(tablatra)[model2])
+head(wilc_1_2)
+
+# Hacemos el test
+LMvsKNNtra <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas.train <- LMvsKNNtra$statistic
+pvalue.train <- LMvsKNNtra$p.value
+LMvsKNNtra <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos.train <- LMvsKNNtra$statistic
+return(list(test=list(Rmas=Rmas.test, Rmenos=Rmenos.test, pvalue=pvalue.test), train=list(Rmas=Rmas.train, Rmenos=Rmenos.train, pvalue=pvalue.train)))
+}
+
+computeWilcoxon(1,2)
+computeWilcoxon(2,3)
+computeWilcoxon(1,3)
+
+# Test de friedman
+friedman.test(as.matrix(tablatra))
+friedman.test(as.matrix(tablatst))
+
+# Test post-hoc Holm
+tam <-dim(tablatra)
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(tablatra), groups, p.adjust= "holm", paired = T)
+
+tam <-dim(tablatst)
+groups <-rep(1:tam[2], each=tam[1])
+pairwise.wilcox.test(as.matrix(tablatst), groups, p.adjust= "holm", paired = T)
+
+\end{lstlisting}
 
 \end{document}
