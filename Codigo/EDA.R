@@ -21,10 +21,14 @@ for(i in 1:length(colnames(dataset_regresion))){
 # Como podemos ver todas las variables son de tipo numérico
 # Ahora vamos a calcular una serie de estadísticos interesantes para cada variable.
 library(e1071)
+
+# Función para calcular la moda
 calculaModa <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
+
+# Función que nos da los estadísticos de una columna del dataset
 calculaEstadisticos<-function(col){
   estadisticos<-list(media=NA, mediana=NA, stdv=NA, moda=NA, curtosis=NA, asimetria=NA, minimo=NA, maximo=NA)
   estadisticos$media<-mean(col, na.rm=TRUE)
@@ -38,6 +42,7 @@ calculaEstadisticos<-function(col){
   return(estadisticos)
 }
 
+# Imprimimos bien formateados los estadísticos
 cat("\n\n\n", "Estadísticos de las columnas:\n")
 for(i in 1:length(colnames(dataset_regresion))){
   cat("\t", colnames(dataset_regresion)[i], ":", "\n")
@@ -56,6 +61,7 @@ for(i in 1:length(colnames(dataset_regresion))){
 ##             Estudio de correlación de las variables               ##
 #######################################################################
 
+# Función que obtiene las variables cuya correlación supere threshold
 obtainCorrelated<-function(varIndex, dataset, threshold=0.9){
   combinations<-combn(varIndex,2)
   
@@ -104,6 +110,7 @@ obtainCorrelated(c(1,7,10:11,13:(length(dataset_regresion)-1)), dataset_regresio
 # Ahora merece la pena que veamos la correlación de las variables con la de salida
 
 
+# Función que obtiene la correlación de las variables con las de salida
 corrSalida<-function(var,dataset){
   for(v in var){
     correlation<-cor(dataset[,v], dataset[,length(dataset)], method=c("pearson", "kendall", "spearman"))
@@ -131,6 +138,7 @@ which(is.na(dataset_regresion))
 ##                           Outliers                                ##
 #######################################################################
 
+# Pairplot
 pairs(dataset_regresion, pch=16, col="deepskyblue")
 
 var<-c(7,10,11,13,14,15)
@@ -150,6 +158,7 @@ library(plyr)
 library(psych)
 multi.hist(dataset_regresion)
 
+# Test de normalidad para una variable
 normalityTest<-function(dataset, var=-1){
   if(var==-1){
     for(i in 1:length(dataset)){

@@ -210,6 +210,7 @@ summary(modelo17)
 ##                            Apartado 3                                 ##
 ###########################################################################
 
+# Función para leer los folds
 readFolds<-function(){
   fold1.train<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tra.dat")
   fold1.test<-read.arff("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Datasets Regresion/treasury/treasury-5-1tst.dat")
@@ -239,6 +240,7 @@ folds<-readFolds()
 
 library(kknn)
 
+# Función que ejecuta knn sobre test o train con el valor de k introducido y la fórmula pasada
 ejecutaKNN<-function(formula, folds, k, tt="test"){
   errores<-vector(mode = "numeric", length = 5)
   for(i in 1:5){
@@ -288,6 +290,8 @@ resultados[,1]
 ###########################################################################
 ##                            Apartado 4                                 ##
 ###########################################################################
+
+# Función que eejecuta LM y obtiene los errores
 ejecutaLM<-function(formula, folds, tt="test"){
   errores<-vector(mode = "numeric", length = 5)
   for(i in 1:5){
@@ -308,54 +312,66 @@ ejecutaLM<-function(formula, folds, tt="test"){
 ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="test")
 ejecutaLM(`1MonthCDRate`~moneyStock+tradeCurrencies+`3Y-CMaturityRate`, folds, tt="train")
 
-regr_train_alumnos<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_train_alumnos.csv")
-regr_test_alumnos<-read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_test_alumnos.csv")
+ejecutaKNN(formula = `1MonthCDRate`~. ,folds = folds, k=5, tt="test")
+ejecutaKNN(formula = `1MonthCDRate`~. ,folds = folds, k=5, tt="train")
 
-#Sacamos las diferencias
-difs<-(regr_train_alumnos$out_train_lm - regr_train_alumnos$out_train_kknn)/regr_train_alumnos$out_train_lm
+ejecutaLM(`1MonthCDRate`~., folds, tt="test")
+ejecutaLM(`1MonthCDRate`~., folds, tt="train")
 
-#Construimos una nueva tabla donde si la diferencia es positiva asignamos 0 para Other
-#y abs(difs) para reference_algorithm y viceversa
-wilc_1_2<-cbind(ifelse(difs<0,abs(difs)+0.1, 0+0.1),ifelse(difs>0, abs(difs)+0.1,0+0.1))
-colnames(wilc_1_2) <-c(colnames(regr_train_alumnos)[1], colnames(regr_train_alumnos)[2])
+# Leemos los resultados de test
+resultadostst <- read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_test_alumnos.csv")
+tablatst <- cbind(resultadostst[,2:dim(resultadostst)[2]])
+colnames(tablatst) <- names(resultadostst)[2:dim(resultadostst)[2]]
+rownames(tablatst) <- resultadostst[,1]
 
-#Realizamos el test
-KNNvsLMtra<-wilcox.test(wilc_1_2[,1], wilc_1_2[,2],alternative="two.sided", paired=T)
-pvalue<-KNNvsLMtra$p.value
-rmas<-KNNvsLMtra$statistic
-LMvsKNNtra<-wilcox.test(wilc_1_2[,2], wilc_1_2[,1],alternative="two.sided", paired=T)
-rmenos<-LMvsKNNtra$statistic
+# Leemos los resultados de train
+resultadostra <- read.csv("/home/nacheteam/MEGA/Master/Introduccion a la ciencia de datos/Trabajo Integrador/DATOS/Tablas de resultados para tests estadisticos/regr_train_alumnos.csv")
+tablatra <- cbind(resultadostra[,2:dim(resultadostra)[2]])
+colnames(tablatra) <- names(resultadostra)[2:dim(resultadostra)[2]]
+rownames(tablatra) <- resultadostra[,1]
+
+# Calculamos las diferencias para test
+difs <- (tablatst[,1] - tablatst[,2]) / tablatst[,1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatst)[1], colnames(tablatst)[2])
+head(wilc_1_2)
+
+# Hacemos el test
+LMvsKNNtst <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas <- LMvsKNNtst$statistic
+pvalue <- LMvsKNNtst$p.value
+LMvsKNNtst <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos <- LMvsKNNtst$statistic
+Rmas
+Rmenos
 pvalue
-rmas
-rmenos
 
+# Calculamos las diferencias para train
+difs <- (tablatra[,1] - tablatra[,2]) / tablatra[,1]
+wilc_1_2 <- cbind(ifelse (difs<0, abs(difs)+0.1, 0+0.1), ifelse (difs>0, abs(difs)+0.1, 0+0.1))
+colnames(wilc_1_2) <- c(colnames(tablatra)[1], colnames(tablatra)[2])
+head(wilc_1_2)
 
-#Repetimos para test
-difs<-(regr_test_alumnos$out_test_lm - regr_test_alumnos$out_test_kknn) /regr_test_alumnos$out_test_lm
-
-#Construimos una nueva tabla donde si la diferencia es positiva asignamos 0 para Other
-#y abs(difs) para reference_algorithm y viceversa
-wilc_1_2 <-cbind(ifelse(difs<0, abs(difs)+0.1,0+0.1),ifelse(difs>0, abs(difs)+0.1,0+0.1))
-colnames(wilc_1_2) <-c(colnames(regr_test_alumnos)[1], colnames(regr_test_alumnos)[2])
-
-#Realizamos el test
-KNNvsLMtest<-wilcox.test(wilc_1_2[,1], wilc_1_2[,2],alternative = "two.sided", paired=T)
-pvalue<-KNNvsLMtra$p.value
-rmas<-KNNvsLMtra$statistic
-LMvsKNNtest<-wilcox.test(wilc_1_2[,2], wilc_1_2[,1],alternative = "two.sided", paired=T)
-rmenos<-LMvsKNNtra$statistic
+# Hacemos el test
+LMvsKNNtra <- wilcox.test(wilc_1_2[,1], wilc_1_2[,2], alternative = "two.sided", paired=TRUE)
+Rmas <- LMvsKNNtra$statistic
+pvalue <- LMvsKNNtra$p.value
+LMvsKNNtra <- wilcox.test(wilc_1_2[,2], wilc_1_2[,1], alternative = "two.sided", paired=TRUE)
+Rmenos <- LMvsKNNtra$statistic
+Rmas
+Rmenos
 pvalue
-rmas
-rmenos
 
-friedman.test(as.matrix(regr_train_alumnos)[,-1])
-friedman.test(as.matrix(regr_test_alumnos[,-1]))
+# Test de friedman
+friedman.test(as.matrix(tablatra))
+friedman.test(as.matrix(tablatst))
 
-tam <-dim(regr_train_alumnos[,-1])
+# Test post-hoc Holm
+tam <-dim(tablatra)
 groups <-rep(1:tam[2], each=tam[1])
-pairwise.wilcox.test(as.matrix(regr_train_alumnos[,-1]), groups, p.adjust= "holm", paired = T)
+pairwise.wilcox.test(as.matrix(tablatra), groups, p.adjust= "holm", paired = T)
 
-tam <-dim(regr_test_alumnos[,-1])
+tam <-dim(tablatst)
 groups <-rep(1:tam[2], each=tam[1])
-pairwise.wilcox.test(as.matrix(regr_test_alumnos[,-1]), groups, p.adjust= "holm", paired = T)
+pairwise.wilcox.test(as.matrix(tablatst), groups, p.adjust= "holm", paired = T)
 
